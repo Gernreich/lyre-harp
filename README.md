@@ -75,7 +75,7 @@ cut that frees the part. These sheets have no green or cyan stage.
 
 <table>
 <tr>
-<td align="center"><a href="lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg"><img src="previews/lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg" alt="The front cheek laid on its side: a stadium outline with the string hole towards the left end, a ring of orange slots round both, small blue numbers beside each slot, seven blue crosses over the arch for the tuning pins, seven blue circled crosses at the right end for the hitch pins, and the knot rosette in orange and blue in the resonator" width="720"></a></td>
+<td align="center"><a href="lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg"><img src="previews/lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg" alt="The front cheek laid on its side: a stadium outline with the string hole towards the left end, a ring of orange slots round both, small blue numbers beside each slot, seven blue crosses over the arch for the tuning pins, seven blue circled crosses at the right end for the hitch pins, and the knot rosette in orange and blue in the resonator" width="100%"></a></td>
 </tr>
 <tr>
 <td align="center"><sub>cheek A · 419.8 × 208.0mm sheet</sub></td>
