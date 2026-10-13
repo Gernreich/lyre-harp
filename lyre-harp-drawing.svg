@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="378.0mm" height="569.8mm" viewBox="-153.99 -153.99 377.98 569.75" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#6b6b6b">
+<svg xmlns="http://www.w3.org/2000/svg" width="378.0mm" height="637.8mm" viewBox="-153.99 -153.99 377.98 637.75" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#6b6b6b">
 <title>Lyre-harp frame, 188 x 400mm</title>
 <desc>Drawing for review, not a cut file. 1 unit = 1mm. Drawn from lyre_harp.py's build(), the geometry the cut files in lyre-harp-bore30-188x400mm/ come from.</desc>
 <defs><marker id="ar" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,2 L10,5 L0,8 z" fill="#6b6b6b"/></marker></defs>
-<rect x="-153.99" y="-153.99" width="377.98" height="569.75" fill="#ffffff"/>
+<rect x="-153.99" y="-153.99" width="377.98" height="637.75" fill="#ffffff"/>
 <path d="M -93.990,-12.374 L -87.585,-36.279 L -75.211,-57.711 L -57.711,-75.211 L -36.279,-87.585 L -12.374,-93.990 L 12.374,-93.990 L 36.279,-87.585 L 57.711,-75.211 L 75.211,-57.711 L 87.585,-36.279 L 93.990,-12.374 L 93.990,224.144 L 87.585,248.049 L 75.211,269.481 L 57.711,286.981 L 36.279,299.355 L 12.374,305.760 L -12.374,305.760 L -36.279,299.355 L -57.711,286.981 L -75.211,269.481 L -87.585,248.049 L -93.990,224.144 L -93.990,-12.374 Z" fill="none" stroke="#111" stroke-width="0.9"/>
 <path d="M -58.240,63.597 L -58.240,0.188 L -56.231,-15.067 L -50.416,-29.108 L -41.164,-41.164 L -29.108,-50.416 L -15.067,-56.231 L -0.000,-58.215 L 15.067,-56.231 L 29.108,-50.416 L 41.164,-41.164 L 50.416,-29.108 L 56.231,-15.067 L 58.240,0.188 L 58.240,63.597 L 55.591,77.315 L 48.177,88.825 L 37.010,96.747 L 23.697,99.942 L 9.393,97.839 L -9.393,97.839 L -23.697,99.942 L -37.010,96.747 L -48.177,88.825 L -55.591,77.315 L -58.240,63.597 Z" fill="none" stroke="#111" stroke-width="0.9"/>
 <path d="M -91.115,-11.995 L -84.905,-35.169 L -72.910,-55.946 L -55.946,-72.910 L -35.169,-84.905 L -11.995,-91.115 L 11.995,-91.115 L 35.169,-84.905 L 55.946,-72.910 L 72.910,-55.946 L 84.905,-35.169 L 91.115,-11.995 L 91.115,223.766 L 84.905,246.939 L 72.910,267.716 L 55.946,284.680 L 35.169,296.676 L 11.995,302.885 L -11.995,302.885 L -35.169,296.676 L -55.946,284.680 L -72.910,267.716 L -84.905,246.939 L -91.115,223.766 L -91.115,-11.995 Z" fill="none" stroke="#1f6fb2" stroke-width="0.5" stroke-dasharray="1.5 2"/>
@@ -50,11 +50,17 @@
 <line x1="-70.00" y1="99.15" x2="-70.00" y2="302.89" stroke="#6b6b6b" stroke-width="0.4" marker-start="url(#ar)" marker-end="url(#ar)"/><text x="-78.00" y="201.02" text-anchor="middle" transform="rotate(90 -78.00 201.02)">resonator 204</text>
 <line x1="55.00" y1="167.06" x2="55.00" y2="302.89" stroke="#6b6b6b" stroke-width="0.4" marker-start="url(#ar)" marker-end="url(#ar)"/><text x="63.00" y="234.97" text-anchor="middle" transform="rotate(90 63.00 234.97)">135.8 = 2/3</text>
 <line x1="-40.00" y1="167.06" x2="60.00" y2="167.06" stroke="#6b6b6b" stroke-width="0.3" stroke-dasharray="4 2"/>
-<text x="-93.99" y="327.76" font-size="8">Lyre-harp frame, 188 x 400mm, drawn from lyre_harp.py: the same build() as the cut files.</text>
-<text x="-93.99" y="339.76" font-size="8">Solid: the cheek's two rims as cut. Dotted blue: the faces the air touches.</text>
-<text x="-93.99" y="351.76" font-size="8">The duct is 30mm deep throughout, 30mm wide over the arch and down the sides (36mm outside),</text>
-<text x="-93.99" y="363.76" font-size="8">and opens below the hole into the resonator.</text>
-<text x="-93.99" y="375.76" font-size="8">Sound hole: the 2-lead 7-bight knot, r30, front cheek only, centred on the axis 2/3 up the resonator.</text>
-<text x="-93.99" y="387.76" font-size="8">Hitch-pin block: 6 laminations, 30mm wide against the bottom wall over 8 facets; 7 2mm hitch pins 16mm apart.</text>
-<text x="-93.99" y="399.76" font-size="8">Tuning-pin block: 6 laminations filling the duct at the arch, one tuning pin above each hitch pin.</text>
+<text x="-93.99" y="327.76" font-size="8">Lyre-harp frame, 188 x 400mm, drawn from lyre_harp.py: the same</text>
+<text x="-93.99" y="339.76" font-size="8">build() as the cut files.</text>
+<text x="-93.99" y="351.76" font-size="8">Solid: the cheek's two rims as cut. Dotted blue: the faces the air</text>
+<text x="-93.99" y="363.76" font-size="8">touches.</text>
+<text x="-93.99" y="375.76" font-size="8">The duct is 30mm deep throughout, 30mm wide over the arch and down</text>
+<text x="-93.99" y="387.76" font-size="8">the sides (36mm outside), and opens below the hole into the</text>
+<text x="-93.99" y="399.76" font-size="8">resonator.</text>
+<text x="-93.99" y="411.76" font-size="8">Sound hole: the 2-lead 7-bight knot, r30, front cheek only, centred</text>
+<text x="-93.99" y="423.76" font-size="8">on the axis 2/3 up the resonator.</text>
+<text x="-93.99" y="435.76" font-size="8">Hitch-pin block: 6 laminations, 30mm wide against the bottom wall</text>
+<text x="-93.99" y="447.76" font-size="8">over 8 facets; 7 2mm hitch pins 16mm apart.</text>
+<text x="-93.99" y="459.76" font-size="8">Tuning-pin block: 6 laminations filling the duct at the arch, one</text>
+<text x="-93.99" y="471.76" font-size="8">tuning pin above each hitch pin.</text>
 </svg>
