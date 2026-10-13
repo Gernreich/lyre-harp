@@ -11,7 +11,7 @@ it prints and cuts at real size.
 
 <table>
 <tr>
-<td align="center"><a href="lyre-harp-drawing.svg"><img src="lyre-harp-drawing.svg" alt="The frame drawn upright and dimensioned: a stadium outline 188mm wide, a string hole 116mm across with a rounded top, a shaded tuning-pin block filling the duct over the arch with seven pin marks, a knot rosette in the resonator below the hole, and a shaded hitch-pin block against the bottom wall with seven more" width="380"></a></td>
+<td align="center"><a href="lyre-harp-drawing.svg"><img src="lyre-harp-drawing.svg" alt="The frame drawn upright and dimensioned: a stadium outline 188mm wide, a string hole 116mm across with a rounded top, a shaded tuning-pin block filling the duct over the arch with seven pin marks, a knot rosette in the resonator below the hole, and a shaded hitch-pin block against the bottom wall with seven more" width="340"></a></td>
 </tr>
 <tr>
 <td align="center"><sub>lyre-harp-drawing.svg · the review drawing, not a cut file</sub></td>
@@ -57,18 +57,19 @@ Each tuning pin stands in line with its hitch pin across the instrument.
 Measured out of the files, not copied from whatever drew them. Every sheet fits a
 600 × 308mm bed; the largest is 593 × 208mm.
 
-| Sheet | Size | What is on it | Colours |
-|---|---|---|---|
-| `lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg` | 419.8 × 208.0mm | the front cheek: 49 slots, the knot, the pin marks | blue, orange, black |
-| `lyre-harp-bore30-188x400mm-narrow-cheek-b-cut-files.svg` | 419.8 × 208.0mm | the back cheek: 49 slots | blue, orange, black |
-| `lyre-harp-bore30-188x400mm-narrow-panels-cut-files.svg` | 593.3 × 136.4mm | the 49 wall panels, numbered | blue, black |
-| `lyre-harp-bore30-188x400mm-narrow-hitch-block-cut-files.svg` | 404.3 × 178.0mm | six hitch-block laminations | blue, black |
-| `lyre-harp-bore30-188x400mm-narrow-tuning-block-cut-files.svg` | 404.2 × 178.0mm | six tuning-block laminations | blue, black |
+| Sheet | Size | What is on it |
+|---|---|---|
+| `lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg` | 419.8 × 208.0mm | the front cheek: 49 slots, the knot, the pin marks |
+| `lyre-harp-bore30-188x400mm-narrow-cheek-b-cut-files.svg` | 419.8 × 208.0mm | the back cheek: 49 slots |
+| `lyre-harp-bore30-188x400mm-narrow-panels-cut-files.svg` | 593.3 × 136.4mm | the 49 wall panels, numbered |
+| `lyre-harp-bore30-188x400mm-narrow-hitch-block-cut-files.svg` | 404.3 × 178.0mm | six hitch-block laminations |
+| `lyre-harp-bore30-188x400mm-narrow-tuning-block-cut-files.svg` | 404.2 × 178.0mm | six tuning-block laminations |
 
 All of them are in `lyre-harp-bore30-188x400mm/cut-files/`.
 
 Run the colours **blue, orange, black**: blue engraves, orange cuts the slots and the
-knot's waste, black frees the part. That is the sequence every LaserMadeMusic
+knot's waste, black frees the part. Only the two cheeks have an orange stage; the
+panels and the laminations are blue and black. That is the sequence every LaserMadeMusic
 repository uses — blue engraves, then green → orange → cyan → black, black always the
 cut that frees the part. These sheets have no green or cyan stage.
 
