@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lyre-harp</title>
+<style>
+:root{--bg:#fbfbfa;--fg:#1a1c1e;--mut:#5b6067;--line:#e2e4e7;--card:#fff;--accent:#1d4ed8;
+--codebg:#f4f5f7;--thbg:#f0f1f3;--mark:#fff8c4}
+@media (prefers-color-scheme:dark){:root{--bg:#15171a;--fg:#e6e8ea;--mut:#9aa1a9;--line:#2b2f34;
+--card:#1b1e22;--accent:#7aa2f7;--codebg:#22262b;--thbg:#23272c;--mark:#4a411c}}
+:root[data-theme=dark]{--bg:#15171a;--fg:#e6e8ea;--mut:#9aa1a9;--line:#2b2f34;--card:#1b1e22;
+--accent:#7aa2f7;--codebg:#22262b;--thbg:#23272c;--mark:#4a411c}
+:root[data-theme=light]{--bg:#fbfbfa;--fg:#1a1c1e;--mut:#5b6067;--line:#e2e4e7;--card:#fff;
+--accent:#1d4ed8;--codebg:#f4f5f7;--thbg:#f0f1f3;--mark:#fff8c4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+font:16px/1.62 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+-webkit-text-size-adjust:100%}
+.wrap{display:grid;grid-template-columns:250px minmax(0,1fr);gap:44px;max-width:1180px;
+margin:0 auto;padding:40px 28px 96px}
+nav{position:sticky;top:28px;align-self:start;max-height:calc(100vh - 56px);overflow:auto;
+border-right:1px solid var(--line);padding-right:16px;font-size:13.5px;line-height:1.45}
+nav b{display:block;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--mut);
+margin:0 0 12px}
+nav a{display:block;color:var(--mut);text-decoration:none;padding:3px 0;border-radius:4px}
+nav a:hover{color:var(--accent)}
+nav a.l1{color:var(--fg);font-weight:640;margin-top:11px}
+nav a.l2{padding-left:12px}
+main{min-width:0}
+h1{font-size:1.62rem;line-height:1.25;letter-spacing:-.015em;margin:2.4em 0 .5em;
+padding-bottom:.32em;border-bottom:2px solid var(--line)}
+main>h1:first-child{margin-top:0;border-bottom:none;font-size:1.95rem}
+h2{font-size:1.16rem;margin:2em 0 .5em;letter-spacing:-.01em}
+h3{font-size:1.02rem;font-weight:650;margin:1.7em 0 .45em}
+p{margin:.85em 0}
+ul,ol{margin:.85em 0;padding-left:1.35em}
+li{margin:.3em 0}
+/* A list with blank lines between its items is "loose", and pandoc wraps each item
+   in a <p> as GitHub does. These pages were set tight before pandoc, so they stay so. */
+li>p{margin:0}
+hr{border:0;border-top:1px solid var(--line);margin:2.6em 0}
+figure{margin:1.6em 0}
+/* A paragraph holding two or more images is a gallery. Left to inline layout they
+   wrap at whatever fits, which put three bells on one row and the fourth alone
+   underneath - directly above the caption, so it read as the caption for that one
+   picture rather than for the set. Flex lets them share the row instead. */
+p:has(img + img){display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;
+justify-content:center}
+p:has(img + img) img{flex:1 1 140px;min-width:0;width:auto;max-width:100%;height:auto;
+border:1px solid var(--line);border-radius:10px}
+figure svg,figure img{display:block;width:100%;max-width:100%;height:auto;
+border:1px solid var(--line);border-radius:10px}
+a{color:var(--accent)}
+code{font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+background:var(--codebg);padding:.1em .32em;border-radius:4px;
+border:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+pre{background:var(--codebg);border:1px solid var(--line);border-radius:9px;
+padding:14px 16px;overflow-x:auto;margin:1.1em 0}
+pre code{background:none;border:0;padding:0;font-size:12.8px;line-height:1.62;white-space:pre}
+blockquote{margin:1.15em 0;padding:.7em 1.1em;border-left:4px solid var(--accent);
+background:var(--codebg);border-radius:0 7px 7px 0}
+blockquote p{margin:0}
+.tw{overflow-x:auto;margin:1.15em 0;border:1px solid var(--line);border-radius:9px;
+background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:8px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+/* honour align="center" on gallery cells: a presentation attribute loses to any
+   CSS rule, so the line above would silently left-align every thumbnail caption */
+td[align=center],th[align=center]{text-align:center}
+th{background:var(--thbg);font-weight:630;white-space:nowrap;font-size:13px;
+letter-spacing:.01em}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:color-mix(in srgb,var(--thbg) 45%,transparent)}
+td code,th code{white-space:nowrap}
+/* A walk inside a link is one token: breaking it mid-walk put "N" at the end of one
+   line and "N5 U" at the start of the next, which reads as two things. */
+a code{white-space:nowrap}
+.tog{position:fixed;top:14px;right:14px;z-index:9;background:var(--card);color:var(--mut);
+border:1px solid var(--line);border-radius:7px;padding:6px 11px;font-size:12.5px;cursor:pointer}
+.tog:hover{color:var(--accent)}
+/* Below 900px the contents list moves to the top of the page, and the fixed theme
+   button sat on top of its first lines. There it scrolls away with the page instead,
+   in a strip of padding kept free for it; fixed, it would ride over the text as the
+   page scrolls, since a narrow screen has no margin for it to sit in. */
+@media (max-width:900px){.wrap{grid-template-columns:1fr;gap:20px;padding:62px 18px 72px}
+.tog{position:absolute}
+nav{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line);
+padding:0 0 16px;columns:2;column-gap:20px}}
+@media print{nav,.tog{display:none}.wrap{display:block;max-width:none;padding:0}
+pre,.tw{break-inside:avoid}h1{break-after:avoid}}
+</style>
+</head>
+<body>
+<button class="tog" type="button">theme</button>
+<div class="wrap">
+<nav><b>Contents</b><a class="l1" href="#lyre-harp">Lyre-harp</a><a class="l2" href="#the-frame">The frame</a><a class="l2" href="#what-is-on-the-sheets">What is on the sheets</a><a class="l2" href="#before-you-cut">Before you cut</a><a class="l2" href="#regenerating-it">Regenerating it</a><a class="l2" href="#files">Files</a></nav>
+<main>
+<h1 id="lyre-harp">Lyre-harp</h1>
+<p><strong><a href="https://gernreich.github.io/lyre-harp/">Read the writeup</a></strong> · <strong><a href="https://gernreich.github.io/lyre-harp/lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html">Turn it in 3D</a></strong></p>
+<p>A seven-string lyre-harp frame, 188 × 400mm, built as <strong>one closed duct</strong> between two flat cheeks. Over the arch and down the sides the duct is 30 × 30mm; below the string hole it opens across the whole gap to the outer wall, and that air is the resonator. Output is millimetre-true — <code>1 user unit = 1 mm</code> with a physical <code>width</code>/<code>height</code> — so it prints and cuts at real size.</p>
+<table>
+<tr>
+<td align="center"><a href="lyre-harp-drawing.svg"><img src="lyre-harp-drawing.svg" alt="The frame drawn upright and dimensioned: a stadium outline 188mm wide, a string hole 116mm across with a rounded top, a shaded tuning-pin block filling the duct over the arch with seven pin marks, a knot rosette in the resonator below the hole, and a shaded hitch-pin block against the bottom wall with seven more" width="380"></a></td>
+</tr>
+<tr>
+<td align="center"><sub>lyre-harp-drawing.svg · the review drawing, not a cut file</sub></td>
+</tr>
+</table>
+
+<p>Built for <strong><a href="https://www.youtube.com/@LaserMadeMusic">LaserMadeMusic</a></strong>, where the cutting and assembly are shown.</p>
+<p><strong><a href="https://gernreich.github.io/">The rest of the build files</a></strong> — every instrument, generator and tool, indexed.</p>
+<p><strong><a href="https://github.com/Gernreich/lyre-harp/archive/refs/heads/main.zip">Download everything as a ZIP</a></strong></p>
+<h2 id="the-frame">The frame</h2>
+<p>The two walls are drawn independently, not offset from one centreline. The outside is a stadium: a half-circle at each end joined by parallel sides. The string hole has a half-circle top concentric with the outer one, parallel sides, and a bottom of two rounded corners with a small bump rising between them. Where the walls run a bore apart the duct is square; below the hole they part, and the duct stays 30mm deep, cheek to cheek, but runs <strong>203.7mm</strong> along the axis.</p>
+<p><strong>49 wall panels</strong> stand between the cheeks: 25 round the string hole and 24 round the outside, each numbered, with the same number engraved beside its slot.</p>
+<p><strong>The sound hole</strong> is the 2-lead 7-bight knot from <strong><a href="https://gernreich.github.io/knotwork-soundholes/">knotwork-soundholes</a></strong>, radius 30mm, placed unchanged in the front cheek on the long axis, two thirds of the way up the resonator: 135.8mm from its bottom. The back cheek is plain, so the cheeks are two parts, each cut once.</p>
+<p><strong>Seven strings, 16mm apart.</strong> Two blocks of six 3mm laminations, 18mm deep, give the pins something to bite into, since 3mm of ply will not hold one under tension:</p>
+<ul>
+<li>the <strong>hitch-pin block</strong> lies against the bottom wall over 8 facets, 30mm wide from it;</li>
+<li>the <strong>tuning-pin block</strong> fills the duct over the arch, wall to wall, across 120°.</li>
+</ul>
+<p>Each tuning pin stands in line with its hitch pin across the instrument.</p>
+<h2 id="what-is-on-the-sheets">What is on the sheets</h2>
+<p>Measured out of the files, not copied from whatever drew them. Every sheet fits a 600 × 308mm bed; the largest is 593 × 208mm.</p>
+<div class="tw">
+<table>
+<thead>
+<tr>
+<th>Sheet</th>
+<th>Size</th>
+<th>What is on it</th>
+<th>Colours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg</code></td>
+<td>419.8 × 208.0mm</td>
+<td>the front cheek: 49 slots, the knot, the pin marks</td>
+<td>blue, orange, black</td>
+</tr>
+<tr>
+<td><code>lyre-harp-bore30-188x400mm-narrow-cheek-b-cut-files.svg</code></td>
+<td>419.8 × 208.0mm</td>
+<td>the back cheek: 49 slots</td>
+<td>blue, orange, black</td>
+</tr>
+<tr>
+<td><code>lyre-harp-bore30-188x400mm-narrow-panels-cut-files.svg</code></td>
+<td>593.3 × 136.4mm</td>
+<td>the 49 wall panels, numbered</td>
+<td>blue, black</td>
+</tr>
+<tr>
+<td><code>lyre-harp-bore30-188x400mm-narrow-hitch-block-cut-files.svg</code></td>
+<td>404.3 × 178.0mm</td>
+<td>six hitch-block laminations</td>
+<td>blue, black</td>
+</tr>
+<tr>
+<td><code>lyre-harp-bore30-188x400mm-narrow-tuning-block-cut-files.svg</code></td>
+<td>404.2 × 178.0mm</td>
+<td>six tuning-block laminations</td>
+<td>blue, black</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>All of them are in <code>lyre-harp-bore30-188x400mm/cut-files/</code>.</p>
+<p>Run the colours <strong>blue, orange, black</strong>: blue engraves, orange cuts the slots and the knot's waste, black frees the part. That is the sequence every LaserMadeMusic repository uses — blue engraves, then green → orange → cyan → black, black always the cut that frees the part. These sheets have no green or cyan stage.</p>
+<table>
+<tr>
+<td align="center"><a href="lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg"><img src="previews/lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg" alt="The front cheek laid on its side: a stadium outline with the string hole towards the left end, a ring of orange slots round both, small blue numbers beside each slot, seven blue crosses over the arch for the tuning pins, seven blue circled crosses at the right end for the hitch pins, and the knot rosette in orange and blue in the resonator" width="720"></a></td>
+</tr>
+<tr>
+<td align="center"><sub>cheek A · 419.8 × 208.0mm sheet</sub></td>
+</tr>
+</table>
+
+<p><em>Click it to download the cut file. This is a display rendering — the cut file draws a hairline on no background, which a browser shows almost invisibly. Orange is darkened in the picture; at full strength it is too pale to read against a white ground. The cut file keeps the exact value.</em></p>
+<h2 id="before-you-cut">Before you cut</h2>
+<p><strong>Cut it in 3mm Baltic birch plywood.</strong> The slots are drawn for a 3mm sheet at a <strong>0.13mm kerf</strong>, measured, and the finger joints are drawn tighter than that — as if the kerf were <strong>0.25mm</strong> — so they close with a rubber mallet rather than a thumb. The joints are press-fit; shellac seals the air gaps.</p>
+<p>Three test sheets come first if your laser or your ply is not the one these were tuned on:</p>
+<div class="tw">
+<table>
+<thead>
+<tr>
+<th>Sheet</th>
+<th>What it tells you</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>KERF-TEST-3mm-ply.svg</code></td>
+<td>your kerf: ten cuts across a strip, and a square hole against the piece that fell out of it</td>
+</tr>
+<tr>
+<td><code>lyre-harp-bore30-188x400mm-narrow-FIT-LADDER-cut-files.svg</code></td>
+<td>the fit: one joint drawn at 0.15, 0.18, 0.21, 0.24 and 0.27, each coupon engraved with its value in hundredths</td>
+</tr>
+<tr>
+<td><code>lyre-harp-bore30-188x400mm-narrow-test-arch-4toA-cut-files.svg</code></td>
+<td>a slice of the arch, 17 parts, to stand up before committing a whole frame</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>The pin marks are engraved, not cut.</strong> A hole in the cheek alone would not guide a drill on into the block behind it, so each hitch pin is a 2mm circle with a cross through it, and each tuning pin is a cross alone: its diameter is yours to choose, and a circle drawn at a guess would read as the hole to drill.</p>
+<p><strong>The laminations are glued</strong>, in number order, into each block.</p>
+<p><strong><code>lyre-harp-bore30-188x400mm-narrow-cheek-a-BACK-FACE-numbers-engrave-only.svg</code> has no cut line in it.</strong> It puts the 49 slot numbers on the back of cheek A, mirrored, for dropping the panels in from that side. Cut cheek A first, turn it over <strong>about its long axis</strong> — the 400mm one, so the sound hole stays at the same end — lay it in the same place and run this. Turned end for end instead, the numbers miss: the string hole is not symmetric that way.</p>
+<p><strong>No acoustic claim is made.</strong> The strings, the pins and the tuning are not in these files — this is the frame.</p>
+<h2 id="regenerating-it">Regenerating it</h2>
+<p>Everything here is drawn by <strong><a href="https://github.com/Gernreich/trumpet-elbows-allowed/blob/main/parts/bore/concept/swept-curve/lyre_harp.py"><code>lyre_harp.py</code></a></strong> in trumpet-elbows-allowed, which shares the panel, slot and sheet code of that repository's ribbon bores. With both repositories cloned side by side, from this one:</p>
+<pre class="sh"><code>G=../trumpet-elbows-allowed/parts/bore/concept/swept-curve/lyre_harp.py
+python3 $G --no-write                     # run the checks, write nothing
+python3 $G --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg     # the five sheets
+python3 $G --fit=0.21 --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg</code></pre>
+<p><code>--fit=</code> redraws the joints at another fit and moves nothing else; the kerf stays the measured one. The checks — panels clear of each other, every engraving on its part, the sound hole over the resonator, the pins in their blocks, every sheet on the bed — run on every write and stop it when one fails. <code>.repro</code> holds the exact command for every file here.</p>
+<h2 id="files">Files</h2>
+<div class="tw">
+<table>
+<tbody>
+<tr>
+<td><code>lyre-harp-bore30-188x400mm/cut-files/</code></td>
+<td>the five build sheets, the three test sheets and the back-face engraving</td>
+</tr>
+<tr>
+<td><code>lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html</code></td>
+<td>the frame in 3D, cheeks, panels and blocks, to drag round</td>
+</tr>
+<tr>
+<td><code>lyre-harp-drawing.svg</code></td>
+<td>the dimensioned review drawing — <strong>not</strong> a cut file</td>
+</tr>
+<tr>
+<td><code>previews/</code></td>
+<td>display renderings of the five build sheets — <strong>not</strong> cut files</td>
+</tr>
+<tr>
+<td><code>README.md</code> · <code>index.html</code></td>
+<td>this writeup and its published page; the markdown is the source</td>
+</tr>
+<tr>
+<td><code>.repro</code></td>
+<td>the command that draws each shipped file</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Released under <a href="LICENSE">CC0 1.0</a>.</p>
+</main>
+</div>
+<script>
+var r=document.documentElement,b=document.querySelector('.tog');
+function set(t){r.setAttribute('data-theme',t);try{localStorage.setItem('ctg-theme',t)}catch(e){}
+b.textContent=t==='dark'?'\u2600 light':'\u263e dark';}
+var saved=null;try{saved=localStorage.getItem('ctg-theme')}catch(e){}
+set(saved||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));
+b.addEventListener('click',function(){set(r.getAttribute('data-theme')==='dark'?'light':'dark')});
+</script>
+</body>
+</html>

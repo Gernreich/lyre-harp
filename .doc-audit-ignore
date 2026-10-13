@@ -1,0 +1,12 @@
+# Names doc-audit reads as filenames that are not files here.
+#
+# lyre_harp.py draws everything in this repository, and lives in
+# trumpet-elbows-allowed beside ribbon_bore.py, whose code it imports. The
+# README links it there and its regeneration block runs it from that checkout.
+#
+# lyre-harp-bore30-188x400mm-narrow.svg is the stem handed to --out=, not a
+# file: the generator names its five sheets from it, adding -cheek-a-cut-files
+# and the rest, and writes no file under the stem itself.
+
+lyre_harp.py
+lyre-harp-bore30-188x400mm-narrow.svg
