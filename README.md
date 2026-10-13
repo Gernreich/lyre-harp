@@ -1,7 +1,11 @@
 # Lyre-harp
 
-**[Read the writeup](https://gernreich.github.io/lyre-harp/)** ·
 **[Turn it in 3D](https://gernreich.github.io/lyre-harp/lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html)**
+
+<!-- readme-only -->
+**[Read the writeup](https://gernreich.github.io/lyre-harp/)**
+
+<!-- page-only **[Read the README](https://github.com/Gernreich/lyre-harp)** -->
 
 A seven-string lyre-harp frame, 188 × 400mm, built as **one closed duct** between two
 flat cheeks. Over the arch and down the sides the duct is 30 × 30mm; below the string
