@@ -22,6 +22,11 @@ it prints and cuts at real size.
 </tr>
 </table>
 
+**The parts are cut.** Both cheeks, with the laminations of the tuning-pin block and the
+hitch-pin block stacked where each one goes. It is not assembled yet:
+
+<p align="center"><img src="photos/lyre-harp-bore30-188x400mm-cheeks-as-cut_web.jpg" alt="The lyre-harp parts as cut, lying side by side on concrete: on the left the front cheek, a long stadium of birch with finger-jointed edges, the string hole near the top, a row of engraved crosses over it and the seven-fold knot rosette below it, with the curved laminations of the hitch-pin block stacked across its lower end; on the right the plain back cheek, with the laminations of the tuning-pin block stacked over the top of its string hole" width="420"></p>
+
 Built for **[LaserMadeMusic](https://www.youtube.com/@LaserMadeMusic)**, where the cutting
 and assembly are shown.
 
@@ -152,6 +157,7 @@ command for every file here.
 | `lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html` | the frame in 3D, cheeks, panels and blocks, to drag round |
 | `lyre-harp-drawing.svg` | the dimensioned review drawing — **not** a cut file |
 | `previews/` | display renderings of the five build sheets — **not** cut files |
+| `photos/` | the build so far, photographed |
 | `README.md` · `index.html` | this writeup and its published page; the markdown is the source |
 | `.repro` | the command that draws each shipped file |
 
