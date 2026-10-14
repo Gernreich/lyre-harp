@@ -49,6 +49,15 @@ header p{margin:6px 0 0;color:var(--muted);max-width:62ch;font-size:13.5px}
 .key span{display:inline-flex;align-items:center;gap:6px}
 .sw{width:12px;height:12px;border-radius:2px;display:inline-block;border:1px solid var(--rule)}
 </style>
+<script>
+/* Follow the theme the site's pages store, so a framed viewer matches the page around it. */
+(function () {
+  var r = document.documentElement;
+  function apply() { var t = null; try { t = localStorage.getItem('ctg-theme'); } catch (e) {}
+    if (t === 'light' || t === 'dark') r.setAttribute('data-theme', t); else r.removeAttribute('data-theme'); }
+  apply(); addEventListener('storage', function (e) { if (e.key === 'ctg-theme') apply(); });
+})();
+</script>
 </head>
 <body>
 <div class="wrap">
