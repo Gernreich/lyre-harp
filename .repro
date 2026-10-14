@@ -1,29 +1,29 @@
 # How every shipped SVG and page in this repository is drawn. Checked by
 # lasermade-tools/repro-svg.py; $OUT is where the file must be written.
 #
-# The generator is not in this repository: lyre_harp.py lives in
-# trumpet-elbows-allowed beside ribbon_bore.py, whose panel, slot and sheet code
-# it imports, so these commands expect the two checkouts side by side. --out=
+# The generator is lyre_harp.py, here since 2026-10-14. It imports the panel,
+# slot and sheet code of ribbon_bore.py from the swept-curve checkout beside this
+# one, so these commands expect the two side by side. --out=
 # and --test= name their own files from the stem they are given, so those
 # commands write into $OUT's directory and the tool compares the file it asked
 # for.
 
 # --- the five build sheets, all written by one --out= run ---
-lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg :: python3 ../trumpet-elbows-allowed/parts/bore/concept/swept-curve/lyre_harp.py --out=$(dirname $OUT)/lyre-harp-bore30-188x400mm-narrow.svg
-lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-cheek-b-cut-files.svg :: python3 ../trumpet-elbows-allowed/parts/bore/concept/swept-curve/lyre_harp.py --out=$(dirname $OUT)/lyre-harp-bore30-188x400mm-narrow.svg
-lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-panels-cut-files.svg :: python3 ../trumpet-elbows-allowed/parts/bore/concept/swept-curve/lyre_harp.py --out=$(dirname $OUT)/lyre-harp-bore30-188x400mm-narrow.svg
-lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-hitch-block-cut-files.svg :: python3 ../trumpet-elbows-allowed/parts/bore/concept/swept-curve/lyre_harp.py --out=$(dirname $OUT)/lyre-harp-bore30-188x400mm-narrow.svg
-lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-tuning-block-cut-files.svg :: python3 ../trumpet-elbows-allowed/parts/bore/concept/swept-curve/lyre_harp.py --out=$(dirname $OUT)/lyre-harp-bore30-188x400mm-narrow.svg
+lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg :: python3 lyre_harp.py --out=$(dirname $OUT)/lyre-harp-bore30-188x400mm-narrow.svg
+lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-cheek-b-cut-files.svg :: python3 lyre_harp.py --out=$(dirname $OUT)/lyre-harp-bore30-188x400mm-narrow.svg
+lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-panels-cut-files.svg :: python3 lyre_harp.py --out=$(dirname $OUT)/lyre-harp-bore30-188x400mm-narrow.svg
+lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-hitch-block-cut-files.svg :: python3 lyre_harp.py --out=$(dirname $OUT)/lyre-harp-bore30-188x400mm-narrow.svg
+lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-tuning-block-cut-files.svg :: python3 lyre_harp.py --out=$(dirname $OUT)/lyre-harp-bore30-188x400mm-narrow.svg
 
 # --- the test sheets and the back-face engraving ---
-lyre-harp-bore30-188x400mm/cut-files/KERF-TEST-3mm-ply.svg :: python3 ../trumpet-elbows-allowed/parts/bore/concept/swept-curve/lyre_harp.py --kerf-test=$OUT
-lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-FIT-LADDER-cut-files.svg :: python3 ../trumpet-elbows-allowed/parts/bore/concept/swept-curve/lyre_harp.py --ladder=$OUT
-lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-test-arch-4toA-cut-files.svg :: python3 ../trumpet-elbows-allowed/parts/bore/concept/swept-curve/lyre_harp.py --test=$(dirname $OUT)/lyre-harp-bore30-188x400mm-narrow.svg
-lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-cheek-a-BACK-FACE-numbers-engrave-only.svg :: python3 ../trumpet-elbows-allowed/parts/bore/concept/swept-curve/lyre_harp.py --back-numbers=$OUT
+lyre-harp-bore30-188x400mm/cut-files/KERF-TEST-3mm-ply.svg :: python3 lyre_harp.py --kerf-test=$OUT
+lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-FIT-LADDER-cut-files.svg :: python3 lyre_harp.py --ladder=$OUT
+lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-test-arch-4toA-cut-files.svg :: python3 lyre_harp.py --test=$(dirname $OUT)/lyre-harp-bore30-188x400mm-narrow.svg
+lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-cheek-a-BACK-FACE-numbers-engrave-only.svg :: python3 lyre_harp.py --back-numbers=$OUT
 
 # --- the review drawing and the 3D page, from the same build() ---
-lyre-harp-drawing.svg :: python3 ../trumpet-elbows-allowed/parts/bore/concept/swept-curve/lyre_harp.py --drawing=$OUT
-lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html :: python3 ../trumpet-elbows-allowed/parts/bore/concept/swept-curve/lyre_harp.py --render=$OUT
+lyre-harp-drawing.svg :: python3 lyre_harp.py --drawing=$OUT
+lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html :: python3 lyre_harp.py --render=$OUT
 
 # --- display renderings, never cut files ---
 previews/lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg :: python3 ../lasermade-tools/make-preview.py lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg $OUT

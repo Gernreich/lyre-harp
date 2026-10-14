@@ -131,16 +131,17 @@ files — this is the frame.
 
 ## Regenerating it
 
-Everything here is drawn by
-**[`lyre_harp.py`](https://github.com/Gernreich/trumpet-elbows-allowed/blob/main/parts/bore/concept/swept-curve/lyre_harp.py)**
-in trumpet-elbows-allowed, which shares the panel, slot and sheet code of that
-repository's ribbon bores. With both repositories cloned side by side, from this one:
+Everything here is drawn by **`lyre_harp.py`**, in this repository. It imports
+the panel, slot and sheet code from
+**[`ribbon_bore.py`](https://github.com/Gernreich/swept-curve/blob/main/ribbon_bore.py)**,
+the generator of the [swept-curve](https://github.com/Gernreich/swept-curve)
+trumpet bores, so it expects that repository cloned beside this one. From this
+one:
 
 ```sh
-G=../trumpet-elbows-allowed/parts/bore/concept/swept-curve/lyre_harp.py
-python3 $G --no-write                     # run the checks, write nothing
-python3 $G --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg     # the five sheets
-python3 $G --fit=0.21 --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg
+python3 lyre_harp.py --no-write                     # run the checks, write nothing
+python3 lyre_harp.py --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg     # the five sheets
+python3 lyre_harp.py --fit=0.21 --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg
 ```
 
 `--fit=` redraws the joints at another fit and moves nothing else; the
@@ -155,6 +156,8 @@ command for every file here.
 |---|---|
 | `lyre-harp-bore30-188x400mm/cut-files/` | the five build sheets, the three test sheets and the back-face engraving |
 | `lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html` | the frame in 3D, cheeks, panels and blocks, to drag round |
+| `lyre_harp.py` | the generator: every sheet, the drawing and the 3D page, with their checks |
+| `NOTES.md` | why the generator draws what it does, and what each check has caught |
 | `lyre-harp-drawing.svg` | the dimensioned review drawing — **not** a cut file |
 | `previews/` | display renderings of the five build sheets — **not** cut files |
 | `photos/` | the build so far, photographed |

@@ -214,11 +214,10 @@ pre,.tw{break-inside:avoid}h1{break-after:avoid}}
 <p><strong><code>lyre-harp-bore30-188x400mm-narrow-cheek-a-BACK-FACE-numbers-engrave-only.svg</code> has no cut line in it.</strong> It puts the 49 slot numbers on the back of cheek A, mirrored, for dropping the panels in from that side. Cut cheek A first, turn it over <strong>about its long axis</strong> — the 400mm one, so the sound hole stays at the same end — lay it in the same place and run this. Turned end for end instead, the numbers miss: the string hole is not symmetric that way.</p>
 <p><strong>No acoustic claim is made.</strong> The strings, the pins and the tuning are not in these files — this is the frame.</p>
 <h2 id="regenerating-it">Regenerating it</h2>
-<p>Everything here is drawn by <strong><a href="https://github.com/Gernreich/trumpet-elbows-allowed/blob/main/parts/bore/concept/swept-curve/lyre_harp.py"><code>lyre_harp.py</code></a></strong> in trumpet-elbows-allowed, which shares the panel, slot and sheet code of that repository's ribbon bores. With both repositories cloned side by side, from this one:</p>
-<pre class="sh"><code>G=../trumpet-elbows-allowed/parts/bore/concept/swept-curve/lyre_harp.py
-python3 $G --no-write                     # run the checks, write nothing
-python3 $G --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg     # the five sheets
-python3 $G --fit=0.21 --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg</code></pre>
+<p>Everything here is drawn by <strong><code>lyre_harp.py</code></strong>, in this repository. It imports the panel, slot and sheet code from <strong><a href="https://github.com/Gernreich/swept-curve/blob/main/ribbon_bore.py"><code>ribbon_bore.py</code></a></strong>, the generator of the <a href="https://github.com/Gernreich/swept-curve">swept-curve</a> trumpet bores, so it expects that repository cloned beside this one. From this one:</p>
+<pre class="sh"><code>python3 lyre_harp.py --no-write                     # run the checks, write nothing
+python3 lyre_harp.py --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg     # the five sheets
+python3 lyre_harp.py --fit=0.21 --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg</code></pre>
 <p><code>--fit=</code> redraws the joints at another fit and moves nothing else; the kerf stays the measured one. The checks — panels clear of each other, every engraving on its part, the sound hole over the resonator, the pins in their blocks, every sheet on the bed — run on every write and stop it when one fails. <code>.repro</code> holds the exact command for every file here.</p>
 <h2 id="files">Files</h2>
 <div class="tw">
@@ -231,6 +230,14 @@ python3 $G --fit=0.21 --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg</code></pr
 <tr>
 <td><code>lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html</code></td>
 <td>the frame in 3D, cheeks, panels and blocks, to drag round</td>
+</tr>
+<tr>
+<td><code>lyre_harp.py</code></td>
+<td>the generator: every sheet, the drawing and the 3D page, with their checks</td>
+</tr>
+<tr>
+<td><code>NOTES.md</code></td>
+<td>why the generator draws what it does, and what each check has caught</td>
 </tr>
 <tr>
 <td><code>lyre-harp-drawing.svg</code></td>
