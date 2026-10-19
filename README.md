@@ -64,7 +64,7 @@ Each tuning pin stands in line with its hitch pin across the instrument.
 ## What is on the sheets
 
 Measured out of the files, not copied from whatever drew them. Every sheet fits a
-600 × 308mm bed; the largest is 593 × 208mm.
+600 × 305mm bed; the largest is 593 × 208mm.
 
 | Sheet | Size | What is on it |
 |---|---|---|
