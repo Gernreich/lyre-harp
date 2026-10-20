@@ -66,8 +66,8 @@ header p{margin:6px 0 0;color:var(--muted);max-width:62ch;font-size:13.5px}
     <p>One closed duct, 30&nbsp;mm deep, in 3&nbsp;mm birch ply. Built from the same geometry as the cut files: two cheeks, 49 wall panels, and laminated blocks at both ends for the hitch and tuning pins.</p>
   </header>
   <div class="grid">
-    <div class="stage" id="stage" aria-label="3D view of the lyre-harp frame. Drag to turn, scroll to zoom.">
-      <span class="hint">Drag to turn &middot; scroll or pinch to zoom</span>
+    <div class="stage" id="stage" aria-label="3D view of the lyre-harp frame. Drag to turn; right-drag, shift-drag or two fingers to pan; scroll or pinch to zoom; double-click a part to turn round it.">
+      <span class="hint">Drag to turn &middot; right-drag to pan &middot; scroll or pinch to zoom &middot; double-click a part to turn round it</span>
     </div>
     <aside class="side">
       <div class="controls">
@@ -196,12 +196,15 @@ const D = {"rim":[[-93.99,12.374],[-87.585,36.279],[-75.211,57.711],[-57.711,75.
     walls.add(m);
   });
 
-  // view state
-  const home = {yaw:-0.62, pitch:0.38, dist:760};
+  // view state: the frame turns about piv, a point in its own coordinates
+  // that sits at the middle of the view; panning and zooming slide piv
+  const home = {yaw:-0.62, pitch:0.38, dist:760, piv:new THREE.Vector3()};
   let yaw=home.yaw, pitch=home.pitch, dist=home.dist;
+  const piv = new THREE.Vector3();
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function place(){
     frame.rotation.set(pitch, yaw, 0);
+    frame.position.copy(piv).applyEuler(frame.rotation).negate();
     camera.position.set(0, 0, dist); camera.lookAt(0,0,0);
   }
   function size(){
@@ -213,34 +216,64 @@ const D = {"rim":[[-93.99,12.374],[-87.585,36.279],[-75.211,57.711],[-57.711,75.
   function render(){ place(); renderer.render(scene, camera); }
   new ResizeObserver(size).observe(stage);
 
-  const pts = new Map(); let pinch0 = 0, dist0 = dist;
+  const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+  const shown = o=>{ for (; o; o=o.parent) if (!o.visible) return false; return true; };
+  function under(cx, cy, partOnly){   // the part under the pointer, else where its ray meets the plane through the middle
+    const b = renderer.domElement.getBoundingClientRect();
+    ndc.set((cx-b.left)/b.width*2-1, -(cy-b.top)/b.height*2+1);
+    ray.setFromCamera(ndc, camera);
+    const hit = ray.intersectObject(frame, true).find(h=>h.object.isMesh && shown(h.object));
+    if (hit || partOnly) return hit ? hit.point : null;
+    return ray.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0,0,1), 0), new THREE.Vector3());
+  }
+  const slide = v=>piv.add(v.applyQuaternion(frame.quaternion.clone().invert()));   // the model moves by -v on screen
+  function pan(dx, dy){   // the model follows the pointer
+    const k = 2*dist*Math.tan(camera.fov*Math.PI/360)/Math.max(renderer.domElement.clientHeight,1);
+    slide(new THREE.Vector3(-dx*k, dy*k, 0));
+  }
+  function zoom(s, cx, cy){   // scale the view about the point under the pointer, which stays where it is on screen
+    const nd = Math.max(30, Math.min(1800, dist*s)), p = under(cx, cy);
+    if (p) slide(p.multiplyScalar(1-nd/dist));
+    dist = nd;
+  }
+  const pts = new Map(); let pinch0 = 0, mid0 = null, panning = false;
+  const two = ()=>{ const [a,b]=[...pts.values()]; return {h:Math.hypot(a.x-b.x,a.y-b.y), x:(a.x+b.x)/2, y:(a.y+b.y)/2}; };
+  stage.addEventListener('contextmenu', e=>e.preventDefault());
   stage.addEventListener('pointerdown', e=>{ stage.setPointerCapture(e.pointerId); pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
-    if (pts.size===2){ const [a,b]=[...pts.values()]; pinch0=Math.hypot(a.x-b.x,a.y-b.y); dist0=dist; } });
+    panning = e.button===1 || e.button===2 || e.shiftKey;
+    if (pts.size===2){ mid0=two(); pinch0=mid0.h; } });
   stage.addEventListener('pointermove', e=>{
     if (!pts.has(e.pointerId)) return;
     const prev = pts.get(e.pointerId); pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    const dx = e.clientX-prev.x, dy = e.clientY-prev.y;
     if (pts.size===1){
-      yaw += (e.clientX-prev.x)*0.008;
-      pitch = Math.max(-1.45, Math.min(1.45, pitch + (e.clientY-prev.y)*0.008));
-    } else if (pts.size===2){
-      const [a,b]=[...pts.values()]; const d=Math.hypot(a.x-b.x,a.y-b.y);
-      if (pinch0) dist = Math.max(260, Math.min(1800, dist0*pinch0/d));
+      if (panning) pan(dx, dy);
+      else { yaw += dx*0.008; pitch = Math.max(-1.45, Math.min(1.45, pitch + dy*0.008)); }
+    } else if (pts.size===2 && pinch0){   // two fingers: pinch to zoom, move together to pan
+      const m=two(); pan(m.x-mid0.x, m.y-mid0.y); render();
+      if (m.h) zoom(pinch0/m.h, m.x, m.y); mid0=m; pinch0=m.h;
     }
     render();
   });
   const up = e=>{ pts.delete(e.pointerId); if (pts.size<2) pinch0=0; };
   stage.addEventListener('pointerup', up); stage.addEventListener('pointercancel', up);
-  stage.addEventListener('wheel', e=>{ e.preventDefault(); dist=Math.max(260,Math.min(1800,dist*(1+Math.sign(e.deltaY)*0.08))); render(); }, {passive:false});
+  stage.addEventListener('wheel', e=>{ e.preventDefault(); zoom(1+Math.sign(e.deltaY)*0.08, e.clientX, e.clientY); render(); }, {passive:false});
 
   function goTo(target){
-    if (reduce){ ({yaw,pitch,dist}=target); render(); return; }
-    const s={yaw,pitch,dist}, t0=performance.now();
+    const t = target.piv || home.piv;
+    if (reduce){ ({yaw,pitch,dist}=target); piv.copy(t); render(); return; }
+    const s={yaw,pitch,dist,piv:piv.clone()}, t0=performance.now();
     (function step(now){
       const k=Math.min(1,(now-t0)/450), e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
       yaw=s.yaw+(target.yaw-s.yaw)*e; pitch=s.pitch+(target.pitch-s.pitch)*e; dist=s.dist+(target.dist-s.dist)*e;
+      piv.lerpVectors(s.piv, t, e);
       render(); if(k<1) requestAnimationFrame(step);
     })(t0);
   }
+  stage.addEventListener('dblclick', e=>{   // turn round the part under the pointer from now on
+    const p = under(e.clientX, e.clientY, true);
+    if (p) goTo({yaw, pitch, dist, piv:frame.worldToLocal(p)});
+  });
   document.getElementById('b-reset').addEventListener('click', ()=>goTo(home));
   document.getElementById('b-front').addEventListener('click', ()=>goTo({yaw:0,pitch:0,dist:720}));
   const bind=(id,obj)=>document.getElementById(id).addEventListener('change',e=>{obj.visible=e.target.checked; render();});
