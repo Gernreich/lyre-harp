@@ -1809,6 +1809,12 @@ header p{margin:6px 0 0;color:var(--muted);max-width:62ch;font-size:13.5px}
 .key{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
 .key span{display:inline-flex;align-items:center;gap:6px}
 .sw{width:12px;height:12px;border-radius:2px;display:inline-block;border:1px solid var(--rule)}
+/* ?embed: framed on the writeup page, which carries the title and the notes itself */
+.embed body{background:transparent;overflow:hidden}
+.embed .wrap{max-width:none;padding:0;gap:0}
+.embed header,.embed .key,.embed .spec{display:none}
+.embed .grid{display:flex;flex-direction:column;gap:10px}
+.embed .stage{aspect-ratio:auto;height:calc(100vh - 64px);max-height:none}
 </style>
 <script>
 /* Follow the theme the site's pages store, so a framed viewer matches the page around it. */
@@ -1817,6 +1823,7 @@ header p{margin:6px 0 0;color:var(--muted);max-width:62ch;font-size:13.5px}
   function apply() { var t = null; try { t = localStorage.getItem('ctg-theme'); } catch (e) {}
     if (t === 'light' || t === 'dark') r.setAttribute('data-theme', t); else r.removeAttribute('data-theme'); }
   apply(); addEventListener('storage', function (e) { if (e.key === 'ctg-theme') apply(); });
+  if (/[?&]embed\b/.test(location.search)) r.classList.add('embed');
 })();
 </script>
 </head>
