@@ -11,10 +11,10 @@ trumpet; it only borrows that generator's parts.
 
 Not a `--shape`, because every shape in `ribbon_bore.py` is two walls a fixed
 bore either side of one centreline. The lyre-harp frame (2026-09-16) is two
-independent closed walls: a stadium 400mm long outside, and a string hole with
+independent closed walls: a stadium 400 mm long outside, and a string hole with
 a concentric arch, parallel sides and a bump between tangent corners. Over the
-arch and down the sides the duct is 30 x 30mm; below the hole it opens to the
-whole gap, about 200mm along the axis, which is the resonator. It imports the
+arch and down the sides the duct is 30 x 30 mm; below the hole it opens to the
+whole gap, about 200 mm along the axis, which is the resonator. It imports the
 panel, mortice, label, packer, sheet and ring-contour code from `ribbon_bore`
 and adds only the two outlines and the checks a constant bore made
 unnecessary. Its cut files go to this repository, whose
@@ -25,7 +25,7 @@ The front cheek carries a sound hole: the 2-lead 7-bight knot from
 unchanged, centred on the axis two thirds of the way up the resonator's air
 from the far end. So the cheeks are two parts now, A with the knot and B
 without, each cut once. The knot's waste is cut with the mortices and its
-crossing marks engraved. Two of those marks end 0.0007 and 0.0018mm past the
+crossing marks engraved. Two of those marks end 0.0007 and 0.0018 mm past the
 edge of a waste cut, rounding in the knot file, so a mark counts as in a hole
 only when it is deeper than half a kerf.
 
@@ -40,25 +40,25 @@ and every panel as a board at its own position, angle and length, drawn with the
 Three library, release r128, loaded from cdnjs. Tabs, slots and engraving are left off.
 
 The hitch-pin block: loop-end strings go over hitch pins driven through the
-bottom wall, and 3mm of ply cannot hold a pin, so six 3mm laminations are glued
-up inside the bottom end, 18mm deep. In plan each lies against the outer wall's
-face and is 30mm wide from it, over 8 facets' length centred on the axis. The
+bottom wall, and 3 mm of ply cannot hold a pin, so six 3 mm laminations are glued
+up inside the bottom end, 18 mm deep. In plan each lies against the outer wall's
+face and is 30 mm wide from it, over 8 facets' length centred on the axis. The
 bottom end has an odd number of facets with one centred on the axis, so 8
 whole facets cannot be symmetric: the span is 7 whole facets and a half at each
 end, which also keeps the block's ends off the panel joints. Its checks compare
 against 8 and 30 as asked, not against the constants that drew it.
 
-Seven hitch pins, 2mm, 16mm apart across the axis and centred on it, go
-through the front cheek into the block. Each sits on the block's mid-line, 15mm
+Seven hitch pins, 2 mm, 16 mm apart across the axis and centred on it, go
+through the front cheek into the block. Each sits on the block's mid-line, 15 mm
 in from the wall face, so the row follows the curve of the bottom end. They
-are ENGRAVED on cheek A as drilling marks -- a 2mm circle with a cross through
+are ENGRAVED on cheek A as drilling marks -- a 2 mm circle with a cross through
 it -- not cut: a hole in the cheek alone would not guide a drill on into the
 block. A spacing the block cannot reach across is refused.
 
 The tuning-pin block is the same idea at the arch: 6 laminations filling the
-duct there, touching the outer wall's face and the string hole's, 30mm between
+duct there, touching the outer wall's face and the string hole's, 30 mm between
 them. It spans 120 degrees -- out to the facet midpoint past the last pin,
-which leaves 33.7mm of wood beyond it -- and carries one tuning pin above each
+which leaves 33.7 mm of wood beyond it -- and carries one tuning pin above each
 hitch pin, on the mid-line of the band and in line with it across the
 instrument. Those marks are a cross with no circle: a tuning pin's diameter is
 the builder's choice, and a ring drawn at a guess reads as the hole to drill.
@@ -66,13 +66,13 @@ the builder's choice, and a ring drawn at a guess reads as the hole to drill.
 Both blocks are written by one lamination_sheet(). Each span ends where a face
 has a vertex -- the string hole's wall carries one every facet -- so both
 builders drop a repeated point first: a zero-length run has no direction to
-offset along, and the kerf offset came back as a 300mm spike.
+offset along, and the kerf offset came back as a 300 mm spike.
 
-**The lyre-harp keeps the measured 0.13mm kerf and tightens its joints with
+**The lyre-harp keeps the measured 0.13 mm kerf and tightens its joints with
 `FIT`, 0.25.** The test came off the bed with loose finger joints (2026-09-20),
 and the kerf was first raised to 0.17 and then 0.20 to tighten them. That
 worked, because an overstated kerf draws each tab fat and each mortice thin,
-but it also drew every other line 0.07mm out: outlines oversize, holes
+but it also drew every other line 0.07 mm out: outlines oversize, holes
 undersize, the duct and the knot with them. So the kerf went back to the truth
 and the interference moved to `FIT`, which only the joints read, then up to
 0.25 for a fit that needs a rubber mallet. `lyre_harp.KERF` sets
@@ -91,7 +91,7 @@ with the inner run, so they are chosen by overlap instead. It refuses to write
 if a mortice corner falls outside the sector.
 
 The faces are drawn and the walls derived from them. Drawn the other way the
-duct over the arch came out 29.72mm (on-circle vertices on the outer wall),
-then 29.987mm (the hole face's mitred vertices), and `the duct is never
+duct over the arch came out 29.72 mm (on-circle vertices on the outer wall),
+then 29.987 mm (the hole face's mitred vertices), and `the duct is never
 narrower than the bore` caught both.
 

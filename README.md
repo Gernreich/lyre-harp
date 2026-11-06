@@ -12,15 +12,15 @@
 
 <!-- page-only <iframe src="lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html?embed" title="The lyre-harp frame as solid parts you can drag to turn: the two cheeks, the panels and the blocks of its closed duct" style="width:100%;height:560px;border:0"></iframe> -->
 
-A seven-string lyre-harp frame, 188 × 400mm, built as **one closed duct** between two
-flat cheeks. Over the arch and down the sides the duct is 30 × 30mm; below the string
+A seven-string lyre-harp frame, 188 × 400 mm, built as **one closed duct** between two
+flat cheeks. Over the arch and down the sides the duct is 30 × 30 mm; below the string
 hole it opens across the whole gap to the outer wall, and that air is the resonator.
 Output is millimetre-true — `1 user unit = 1 mm` with a physical `width`/`height` — so
 it prints and cuts at real size.
 
 <table>
 <tr>
-<td align="center"><a href="lyre-harp-drawing.svg"><img src="lyre-harp-drawing.svg" alt="The frame drawn upright and dimensioned: a stadium outline 188mm wide, a string hole 116mm across with a rounded top, a shaded tuning-pin block filling the duct over the arch with seven pin marks, a knot rosette in the resonator below the hole, and a shaded hitch-pin block against the bottom wall with seven more" width="340"></a></td>
+<td align="center"><a href="lyre-harp-drawing.svg"><img src="lyre-harp-drawing.svg" alt="The frame drawn upright and dimensioned: a stadium outline 188 mm wide, a string hole 116 mm across with a rounded top, a shaded tuning-pin block filling the duct over the arch with seven pin marks, a knot rosette in the resonator below the hole, and a shaded hitch-pin block against the bottom wall with seven more" width="340"></a></td>
 </tr>
 <tr>
 <td align="center"><sub>lyre-harp-drawing.svg · the review drawing, not a cut file</sub></td>
@@ -46,22 +46,22 @@ The two walls are drawn independently, not offset from one centreline. The outsi
 stadium: a half-circle at each end joined by parallel sides. The string hole has a
 half-circle top concentric with the outer one, parallel sides, and a bottom of two
 rounded corners with a small bump rising between them. Where the walls run a bore
-apart the duct is square; below the hole they part, and the duct stays 30mm deep,
-cheek to cheek, but runs **203.7mm** along the axis.
+apart the duct is square; below the hole they part, and the duct stays 30 mm deep,
+cheek to cheek, but runs **203.7 mm** along the axis.
 
 **49 wall panels** stand between the cheeks: 25 round the string hole and 24 round the
 outside, each numbered, with the same number engraved beside its slot.
 
 **The sound hole** is the 2-lead 7-bight knot from
-**[knotwork-soundholes](https://gernreich.github.io/knotwork-soundholes/)**, radius 30mm,
+**[knotwork-soundholes](https://gernreich.github.io/knotwork-soundholes/)**, radius 30 mm,
 placed unchanged in the front cheek on the long axis, two thirds of the way up the
-resonator: 135.8mm from its bottom. The back cheek is plain, so the cheeks are two
+resonator: 135.8 mm from its bottom. The back cheek is plain, so the cheeks are two
 parts, each cut once.
 
-**Seven strings, 16mm apart.** Two blocks of six 3mm laminations, 18mm deep, give the
-pins something to bite into, since 3mm of ply will not hold one under tension:
+**Seven strings, 16 mm apart.** Two blocks of six 3 mm laminations, 18 mm deep, give the
+pins something to bite into, since 3 mm of ply will not hold one under tension:
 
-- the **hitch-pin block** lies against the bottom wall over 8 facets, 30mm wide from it;
+- the **hitch-pin block** lies against the bottom wall over 8 facets, 30 mm wide from it;
 - the **tuning-pin block** fills the duct over the arch, wall to wall, across 120°.
 
 Each tuning pin stands in line with its hitch pin across the instrument.
@@ -69,15 +69,15 @@ Each tuning pin stands in line with its hitch pin across the instrument.
 ## What is on the sheets
 
 Measured out of the files, not copied from whatever drew them. Every sheet fits a
-600 × 305mm bed; the widest is 593.3mm across, the tallest 208.0mm.
+600 × 305 mm bed; the widest is 593.3 mm across, the tallest 208.0 mm.
 
 | Sheet | Size | What is on it |
 |---|---|---|
-| `lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg` | 419.8 × 208.0mm | the front cheek: 49 slots, the knot, the pin marks |
-| `lyre-harp-bore30-188x400mm-narrow-cheek-b-cut-files.svg` | 419.8 × 208.0mm | the back cheek: 49 slots |
-| `lyre-harp-bore30-188x400mm-narrow-panels-cut-files.svg` | 593.3 × 136.4mm | the 49 wall panels, numbered |
-| `lyre-harp-bore30-188x400mm-narrow-hitch-block-cut-files.svg` | 404.3 × 178.0mm | six hitch-block laminations |
-| `lyre-harp-bore30-188x400mm-narrow-tuning-block-cut-files.svg` | 404.2 × 178.0mm | six tuning-block laminations |
+| `lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg` | 419.8 × 208.0 mm | the front cheek: 49 slots, the knot, the pin marks |
+| `lyre-harp-bore30-188x400mm-narrow-cheek-b-cut-files.svg` | 419.8 × 208.0 mm | the back cheek: 49 slots |
+| `lyre-harp-bore30-188x400mm-narrow-panels-cut-files.svg` | 593.3 × 136.4 mm | the 49 wall panels, numbered |
+| `lyre-harp-bore30-188x400mm-narrow-hitch-block-cut-files.svg` | 404.3 × 178.0 mm | six hitch-block laminations |
+| `lyre-harp-bore30-188x400mm-narrow-tuning-block-cut-files.svg` | 404.2 × 178.0 mm | six tuning-block laminations |
 
 All of them are in `lyre-harp-bore30-188x400mm/cut-files/`.
 
@@ -92,7 +92,7 @@ cut that frees the part. These sheets have no green or cyan stage.
 <td align="center"><a href="lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg"><img src="previews/lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg" alt="The front cheek laid on its side: a stadium outline with the string hole towards the left end, a ring of orange slots round both, small blue numbers beside each slot, seven blue crosses over the arch for the tuning pins, seven blue circled crosses at the right end for the hitch pins, and the knot rosette in orange and blue in the resonator" width="100%"></a></td>
 </tr>
 <tr>
-<td align="center"><sub>cheek A · 419.8 × 208.0mm sheet</sub></td>
+<td align="center"><sub>cheek A · 419.8 × 208.0 mm sheet</sub></td>
 </tr>
 </table>
 
@@ -103,9 +103,9 @@ file keeps the exact value.*
 
 ## Before you cut
 
-**Cut it in 3mm Baltic birch plywood.** The slots are drawn for a 3mm sheet at a
-**0.13mm kerf**, measured, and the finger joints are drawn tighter than that — as if
-the kerf were **0.25mm** — so they close with a rubber mallet rather than a thumb. The
+**Cut it in 3 mm Baltic birch plywood.** The slots are drawn for a 3 mm sheet at a
+**0.13 mm kerf**, measured, and the finger joints are drawn tighter than that — as if
+the kerf were **0.25 mm** — so they close with a rubber mallet rather than a thumb. The
 joints are press-fit; shellac seals the air gaps.
 
 Three test sheets come first if your laser or your ply is not the one these were tuned
@@ -118,7 +118,7 @@ on:
 | `lyre-harp-bore30-188x400mm-narrow-test-arch-4toA-cut-files.svg` | a slice of the arch, 17 parts, to stand up before committing a whole frame |
 
 **The pin marks are engraved, not cut.** A hole in the cheek alone would not guide a
-drill on into the block behind it, so each hitch pin is a 2mm circle with a cross
+drill on into the block behind it, so each hitch pin is a 2 mm circle with a cross
 through it, and each tuning pin is a cross alone: its diameter is yours to choose, and
 a circle drawn at a guess would read as the hole to drill.
 
@@ -126,7 +126,7 @@ a circle drawn at a guess would read as the hole to drill.
 
 **`lyre-harp-bore30-188x400mm-narrow-cheek-a-BACK-FACE-numbers-engrave-only.svg` has no cut line in it.** It
 puts the 49 slot numbers on the back of cheek A, mirrored, for dropping the panels in
-from that side. Cut cheek A first, turn it over **about its long axis** — the 400mm
+from that side. Cut cheek A first, turn it over **about its long axis** — the 400 mm
 one, so the sound hole stays at the same end — lay it in the same place and run this.
 Turned end for end instead, the numbers miss: the string hole is not symmetric that
 way.
