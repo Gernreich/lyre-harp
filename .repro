@@ -1,5 +1,5 @@
 # How every shipped SVG and page in this repository is drawn. Checked by
-# lasermade-tools/repro-svg.py; $OUT is where the file must be written.
+# lasermade-tools' repro-svg; $OUT is where the file must be written.
 #
 # The generator is lyre_harp.py, here since 2026-10-14. It imports the panel,
 # slot and sheet code of ribbon_bore.py from the swept-curve checkout beside this
@@ -26,11 +26,11 @@ lyre-harp-drawing.svg :: python3 lyre_harp.py --drawing=$OUT
 lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html :: python3 lyre_harp.py --render=$OUT
 
 # --- display renderings, never cut files ---
-previews/lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg :: python3 ../lasermade-tools/make-preview.py lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg $OUT
-previews/lyre-harp-bore30-188x400mm-narrow-cheek-b-cut-files.svg :: python3 ../lasermade-tools/make-preview.py lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-cheek-b-cut-files.svg $OUT
-previews/lyre-harp-bore30-188x400mm-narrow-panels-cut-files.svg :: python3 ../lasermade-tools/make-preview.py lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-panels-cut-files.svg $OUT
-previews/lyre-harp-bore30-188x400mm-narrow-hitch-block-cut-files.svg :: python3 ../lasermade-tools/make-preview.py lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-hitch-block-cut-files.svg $OUT
-previews/lyre-harp-bore30-188x400mm-narrow-tuning-block-cut-files.svg :: python3 ../lasermade-tools/make-preview.py lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-tuning-block-cut-files.svg $OUT
+previews/lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg :: ../lasermade-tools/target/release/make-preview lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-cheek-a-cut-files.svg $OUT
+previews/lyre-harp-bore30-188x400mm-narrow-cheek-b-cut-files.svg :: ../lasermade-tools/target/release/make-preview lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-cheek-b-cut-files.svg $OUT
+previews/lyre-harp-bore30-188x400mm-narrow-panels-cut-files.svg :: ../lasermade-tools/target/release/make-preview lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-panels-cut-files.svg $OUT
+previews/lyre-harp-bore30-188x400mm-narrow-hitch-block-cut-files.svg :: ../lasermade-tools/target/release/make-preview lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-hitch-block-cut-files.svg $OUT
+previews/lyre-harp-bore30-188x400mm-narrow-tuning-block-cut-files.svg :: ../lasermade-tools/target/release/make-preview lyre-harp-bore30-188x400mm/cut-files/lyre-harp-bore30-188x400mm-narrow-tuning-block-cut-files.svg $OUT
 
 # --- the published page, built from README.md ---
-index.html :: python3 ../lasermade-tools/md2html.py README.md $OUT
+index.html :: ../lasermade-tools/target/release/md2html README.md $OUT
