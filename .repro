@@ -35,3 +35,7 @@ previews/lyre-harp-bore30-188x400mm-narrow-tuning-block-cut-files.svg :: ../lase
 
 # --- the published page, built from README.md ---
 index.html :: ../lasermade-tools/target/release/md2html README.md $OUT
+
+# --- the STEP files: the 3D view's parts as solids for a CAD program, one
+# file per design, written from the page by lasermade-tools' step-export ---
+lyre-harp-bore30-188x400mm/step/lyre-harp-bore30-188x400mm.step :: ../lasermade-tools/target/release/step-export lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html --out=$(dirname $OUT)
