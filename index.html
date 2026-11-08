@@ -273,6 +273,10 @@ target/release/lyre_harp --fit=0.21 --out=DIR/lyre-harp-bore30-188x400mm-narrow.
 <h2 id="step-files">STEP files</h2>
 <p><code>lyre-harp-bore30-188x400mm/step/</code> holds the 3D view as STEP files, one per design, to open or import in a CAD program such as SolidCraft, Fusion or FreeCAD: one solid body per part, in millimetres, assembled as the view shows it. Every face is flat, so a curve comes in as short straight runs; the lyre-harp's wall panels come in as the plain boxes the view draws, and the hitch and tuning pins are left out. They are written from <code>lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html</code> by lasermade-tools' <code>step-export</code>, and <code>.repro</code> checks them:</p>
 <pre><code>../lasermade-tools/target/release/step-export lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html</code></pre>
+<p>The files:</p>
+<ul>
+<li><code>lyre-harp-bore30-188x400mm/step/lyre-harp-bore30-188x400mm.step</code></li>
+</ul>
 <h2 id="credits">Credits</h2>
 <p>Made by Michael Gernreich with <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener">Claude</a> (Anthropic), working in Claude Code, which co-wrote the code and the documentation. Commits Claude made carry a <code>Co-Authored-By: Claude</code> line.</p>
 </main>

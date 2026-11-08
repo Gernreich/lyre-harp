@@ -187,6 +187,10 @@ lasermade-tools' `step-export`, and `.repro` checks them:
 ../lasermade-tools/target/release/step-export lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html
 ```
 
+The files:
+
+- `lyre-harp-bore30-188x400mm/step/lyre-harp-bore30-188x400mm.step`
+
 ## Credits
 
 Made by Michael Gernreich with [Claude](https://www.anthropic.com/claude) (Anthropic), working in Claude Code, which co-wrote the code and the documentation. Commits Claude made carry a `Co-Authored-By: Claude` line.
