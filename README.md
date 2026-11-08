@@ -149,6 +149,7 @@ cargo build --release
 target/release/lyre_harp --no-write                     # run the checks, write nothing
 target/release/lyre_harp --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg     # the five sheets
 target/release/lyre_harp --fit=0.21 --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg
+target/release/lyre_harp --solidcraft=DIR                # the SolidCraft design
 ```
 
 `--fit=` redraws the joints at another fit and moves nothing else; the
@@ -163,6 +164,7 @@ command for every file here.
 |---|---|
 | `lyre-harp-bore30-188x400mm/cut-files/` | the five build sheets, the three test sheets and the back-face engraving |
 | `lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html` | the frame in 3D, cheeks, panels and blocks, to drag round |
+| `lyre_solidcraft.rs` · `lyre-harp-bore30-188x400mm/solidcraft/` | the frame as a parametric SolidCraft design, and the design it writes |
 | `lyre_harp.rs` · `lyre_harp_page.rs` | the generator: every sheet, the drawing and the 3D page, with their checks; the second holds the 3D page's browser code |
 | `Cargo.toml` · `Cargo.lock` | what `cargo build --release` builds it from |
 | `NOTES.md` | why the generator draws what it does, and what each check has caught |
@@ -174,17 +176,52 @@ command for every file here.
 
 Released under [CC0 1.0](LICENSE).
 
+## SolidCraft design
+
+`lyre_harp --solidcraft=DIR` also writes the frame as a parametric SolidCraft design:
+its size, bore, ply and fit are parameters, and every point of the frame follows them as
+the generator works it out — the two outlines, the air's faces, each wall's centreline,
+the cheeks' rims, all 49 panels with their mitre trims, both blocks and the knot. Open
+`lyre-harp-bore30-188x400mm/solidcraft/lyre-harp-bore30-188x400mm.sc` in SolidCraft. The parameters are under
+the **SOLID** tab, **MODIFY** panel, **Change Parameters**; the Browser lists the parts
+and the timeline every step. `lyre-harp-bore30-188x400mm/solidcraft/lyre-harp-bore30-188x400mm.solidcraft.json`
+is the script it was built from (`solidcraft-cli run FILE --save NAME.sc`). The `.sc`
+holds the design without SolidCraft's build cache, which it rebuilds on opening, so it
+is the same file every time.
+
+| Parameter | Default | What it is |
+|---|---|---|
+| `length` · `width_k` | 400 mm · 0.4706 | the outer outline end to end, and its width per mm of length |
+| `bore` | 30 mm | the duct's depth everywhere, and its width over the arch and down the sides |
+| `ply` | 3 mm | every wall, cheek and lamination |
+| `hole_straight` · `hole_corner` · `hole_bump` | 1.099 · 0.620 · 0.065 | the hole's straight sides, bottom corners and bump, per mm of its half-width |
+| `kerf` · `fit` | 0.13 · 0.25 mm | the beam, and the kerf the joints are drawn as if cut at (`--fit=`); the cheeks' rims follow the fit |
+| `knot_up` | 0.667 | the knot's centre, its share of the way from the outer wall's far end to the bump |
+| `hitch_w` | 30 mm | the hitch block, in from the outer wall's face |
+| `pins` · `pin_spacing` · `tune_extra` · `facet` | 7 · 16 mm · 15 mm · 15° | the tuning block's span: past the outermost pin, out to the next facet's middle |
+
+The rest are read-only parameters, a few hundred of them: each point's `_x` and `_y`,
+each face edge's normal and each vertex's mitre, each panel's trims, length and middle.
+How many facets each arc has, and which facets a block starts on, are the default
+build's, so they stay put while the numbers move. As in the 3D view the panels are
+plain boxes, without teeth or slots, the cheeks have no mortices, and the pins are left
+out.
+
+**Checked** part by part against the generator's own: all 63 parts match to within
+0.001 mm, the page's rounding. Built by the generator with `--fit=0.20`, and with the
+frame 420 mm long, a 28 mm bore and 3.2 mm ply, and given the same numbers, every part
+matches the same way.
+
 ## STEP files
 
-`lyre-harp-bore30-188x400mm/step/` holds the 3D view as STEP files, one per design, to open or import in a
-CAD program such as SolidCraft, Fusion or FreeCAD: one solid body per part, in
-millimetres, assembled as the view shows it. Every face is flat, so a curve comes
-in as short straight runs; the lyre-harp's wall panels come in as the plain boxes the view draws, and the
-hitch and tuning pins are left out. They are written from `lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html` by
-lasermade-tools' `step-export`, and `.repro` checks them:
+`lyre-harp-bore30-188x400mm/step/` holds the SolidCraft design, built by SolidCraft, as a STEP file to open or
+import in a CAD program such as Fusion or FreeCAD: one solid body per part, in
+millimetres, assembled, with no parameters. The wall panels are the plain boxes the
+3D view draws, and the hitch and tuning pins are left out. `.repro` checks it:
 
 ```
-../lasermade-tools/target/release/step-export lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html
+target/release/lyre_harp --solidcraft=lyre-harp-bore30-188x400mm/solidcraft
+solidcraft-cli run lyre-harp-bore30-188x400mm/solidcraft/lyre-harp-bore30-188x400mm.solidcraft.json --out lyre-harp-bore30-188x400mm/step/lyre-harp-bore30-188x400mm.step
 ```
 
 The files:

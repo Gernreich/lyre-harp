@@ -99,7 +99,7 @@ pre,.tw{break-inside:avoid}h1{break-after:avoid}}
 <body>
 <button class="tog" type="button">theme</button>
 <div class="wrap">
-<nav><b>Contents</b><a class="l1" href="#lyre-harp">Lyre-harp</a><a class="l2" href="#the-frame">The frame</a><a class="l2" href="#what-is-on-the-sheets">What is on the sheets</a><a class="l2" href="#before-you-cut">Before you cut</a><a class="l2" href="#regenerating-it">Regenerating it</a><a class="l2" href="#files">Files</a><a class="l2" href="#step-files">STEP files</a><a class="l2" href="#credits">Credits</a></nav>
+<nav><b>Contents</b><a class="l1" href="#lyre-harp">Lyre-harp</a><a class="l2" href="#the-frame">The frame</a><a class="l2" href="#what-is-on-the-sheets">What is on the sheets</a><a class="l2" href="#before-you-cut">Before you cut</a><a class="l2" href="#regenerating-it">Regenerating it</a><a class="l2" href="#files">Files</a><a class="l2" href="#solidcraft-design">SolidCraft design</a><a class="l2" href="#step-files">STEP files</a><a class="l2" href="#credits">Credits</a></nav>
 <main>
 <h1 id="lyre-harp">Lyre-harp</h1>
 <p><strong><a href="https://gernreich.github.io/" target="_blank" rel="noopener">← All projects</a></strong></p>
@@ -220,7 +220,8 @@ pre,.tw{break-inside:avoid}h1{break-after:avoid}}
 <pre class="sh"><code>cargo build --release
 target/release/lyre_harp --no-write                     # run the checks, write nothing
 target/release/lyre_harp --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg     # the five sheets
-target/release/lyre_harp --fit=0.21 --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg</code></pre>
+target/release/lyre_harp --fit=0.21 --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg
+target/release/lyre_harp --solidcraft=DIR                # the SolidCraft design</code></pre>
 <p><code>--fit=</code> redraws the joints at another fit and moves nothing else; the kerf stays the measured one. The checks — panels clear of each other, every engraving on its part, the sound hole over the resonator, the pins in their blocks, every sheet on the bed — run on every write and stop it when one fails. <code>.repro</code> holds the exact command for every file here.</p>
 <h2 id="files">Files</h2>
 <div class="tw">
@@ -233,6 +234,10 @@ target/release/lyre_harp --fit=0.21 --out=DIR/lyre-harp-bore30-188x400mm-narrow.
 <tr>
 <td><code>lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html</code></td>
 <td>the frame in 3D, cheeks, panels and blocks, to drag round</td>
+</tr>
+<tr>
+<td><code>lyre_solidcraft.rs</code> · <code>lyre-harp-bore30-188x400mm/solidcraft/</code></td>
+<td>the frame as a parametric SolidCraft design, and the design it writes</td>
 </tr>
 <tr>
 <td><code>lyre_harp.rs</code> · <code>lyre_harp_page.rs</code></td>
@@ -270,9 +275,67 @@ target/release/lyre_harp --fit=0.21 --out=DIR/lyre-harp-bore30-188x400mm-narrow.
 </table>
 </div>
 <p>Released under <a href="LICENSE" target="_blank" rel="noopener">CC0 1.0</a>.</p>
+<h2 id="solidcraft-design">SolidCraft design</h2>
+<p><code>lyre_harp --solidcraft=DIR</code> also writes the frame as a parametric SolidCraft design: its size, bore, ply and fit are parameters, and every point of the frame follows them as the generator works it out — the two outlines, the air's faces, each wall's centreline, the cheeks' rims, all 49 panels with their mitre trims, both blocks and the knot. Open <code>lyre-harp-bore30-188x400mm/solidcraft/lyre-harp-bore30-188x400mm.sc</code> in SolidCraft. The parameters are under the <strong>SOLID</strong> tab, <strong>MODIFY</strong> panel, <strong>Change Parameters</strong>; the Browser lists the parts and the timeline every step. <code>lyre-harp-bore30-188x400mm/solidcraft/lyre-harp-bore30-188x400mm.solidcraft.json</code> is the script it was built from (<code>solidcraft-cli run FILE --save NAME.sc</code>). The <code>.sc</code> holds the design without SolidCraft's build cache, which it rebuilds on opening, so it is the same file every time.</p>
+<div class="tw">
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>length</code> · <code>width_k</code></td>
+<td>400 mm · 0.4706</td>
+<td>the outer outline end to end, and its width per mm of length</td>
+</tr>
+<tr>
+<td><code>bore</code></td>
+<td>30 mm</td>
+<td>the duct's depth everywhere, and its width over the arch and down the sides</td>
+</tr>
+<tr>
+<td><code>ply</code></td>
+<td>3 mm</td>
+<td>every wall, cheek and lamination</td>
+</tr>
+<tr>
+<td><code>hole_straight</code> · <code>hole_corner</code> · <code>hole_bump</code></td>
+<td>1.099 · 0.620 · 0.065</td>
+<td>the hole's straight sides, bottom corners and bump, per mm of its half-width</td>
+</tr>
+<tr>
+<td><code>kerf</code> · <code>fit</code></td>
+<td>0.13 · 0.25 mm</td>
+<td>the beam, and the kerf the joints are drawn as if cut at (<code>--fit=</code>); the cheeks' rims follow the fit</td>
+</tr>
+<tr>
+<td><code>knot_up</code></td>
+<td>0.667</td>
+<td>the knot's centre, its share of the way from the outer wall's far end to the bump</td>
+</tr>
+<tr>
+<td><code>hitch_w</code></td>
+<td>30 mm</td>
+<td>the hitch block, in from the outer wall's face</td>
+</tr>
+<tr>
+<td><code>pins</code> · <code>pin_spacing</code> · <code>tune_extra</code> · <code>facet</code></td>
+<td>7 · 16 mm · 15 mm · 15°</td>
+<td>the tuning block's span: past the outermost pin, out to the next facet's middle</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The rest are read-only parameters, a few hundred of them: each point's <code>_x</code> and <code>_y</code>, each face edge's normal and each vertex's mitre, each panel's trims, length and middle. How many facets each arc has, and which facets a block starts on, are the default build's, so they stay put while the numbers move. As in the 3D view the panels are plain boxes, without teeth or slots, the cheeks have no mortices, and the pins are left out.</p>
+<p><strong>Checked</strong> part by part against the generator's own: all 63 parts match to within 0.001 mm, the page's rounding. Built by the generator with <code>--fit=0.20</code>, and with the frame 420 mm long, a 28 mm bore and 3.2 mm ply, and given the same numbers, every part matches the same way.</p>
 <h2 id="step-files">STEP files</h2>
-<p><code>lyre-harp-bore30-188x400mm/step/</code> holds the 3D view as STEP files, one per design, to open or import in a CAD program such as SolidCraft, Fusion or FreeCAD: one solid body per part, in millimetres, assembled as the view shows it. Every face is flat, so a curve comes in as short straight runs; the lyre-harp's wall panels come in as the plain boxes the view draws, and the hitch and tuning pins are left out. They are written from <code>lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html</code> by lasermade-tools' <code>step-export</code>, and <code>.repro</code> checks them:</p>
-<pre><code>../lasermade-tools/target/release/step-export lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html</code></pre>
+<p><code>lyre-harp-bore30-188x400mm/step/</code> holds the SolidCraft design, built by SolidCraft, as a STEP file to open or import in a CAD program such as Fusion or FreeCAD: one solid body per part, in millimetres, assembled, with no parameters. The wall panels are the plain boxes the 3D view draws, and the hitch and tuning pins are left out. <code>.repro</code> checks it:</p>
+<pre><code>target/release/lyre_harp --solidcraft=lyre-harp-bore30-188x400mm/solidcraft
+solidcraft-cli run lyre-harp-bore30-188x400mm/solidcraft/lyre-harp-bore30-188x400mm.solidcraft.json --out lyre-harp-bore30-188x400mm/step/lyre-harp-bore30-188x400mm.step</code></pre>
 <p>The files:</p>
 <ul>
 <li><code>lyre-harp-bore30-188x400mm/step/lyre-harp-bore30-188x400mm.step</code></li>

@@ -6,6 +6,7 @@
 //!     target/release/lyre_harp --out=DIR/lyre-harp-....svg
 //!     target/release/lyre_harp --drawing=DIR/lyre-harp-drawing.svg
 //!     target/release/lyre_harp --render=DIR/lyre-harp-....html
+//!     target/release/lyre_harp --solidcraft=DIR
 //!
 //! ribbon_bore builds every duct as two walls offset a fixed bore either side
 //! of ONE centreline, so its section is the same all the way round. This one
@@ -42,6 +43,8 @@ use std::rc::Rc;
 
 #[path = "lyre_harp_page.rs"]
 mod lyre_harp_page;
+#[path = "lyre_solidcraft.rs"]
+mod lyre_solidcraft;
 
 const LENGTH: f64 = 400.0; // outer outline, end to end
 // KERF, the full width the laser takes out, for THIS instrument only. 0.13 is
@@ -1795,11 +1798,11 @@ fn render(l: &Lyre, path_out: &str) -> R<i32> {
 
 /// An Err starting with NUL is a SystemExit: its text on stderr.
 fn run(a: &[String]) -> R<i32> {
-    const TAKES: [&str; 8] = ["--out=", "--drawing=", "--render=", "--test=", "--fit=", "--back-numbers=", "--ladder=", "--kerf-test="];
+    const TAKES: [&str; 9] = ["--out=", "--drawing=", "--render=", "--test=", "--fit=", "--back-numbers=", "--ladder=", "--kerf-test=", "--solidcraft="];
     for x in a {
         if !(x == "--no-write" || TAKES.iter().any(|p| x.starts_with(p))) {
             return Err(format!(
-                "\x00error: {x} is not a flag this generator reads. It takes --out=, --drawing=, --render=, --test=, --fit=, --back-numbers=, --ladder=, --kerf-test= and --no-write."
+                "\x00error: {x} is not a flag this generator reads. It takes --out=, --drawing=, --render=, --test=, --fit=, --back-numbers=, --ladder=, --kerf-test=, --solidcraft= and --no-write."
             ));
         }
     }
@@ -1830,6 +1833,13 @@ fn run(a: &[String]) -> R<i32> {
     }
     if let Some(p) = arg("--test=") {
         return test_piece(&l, &p);
+    }
+    if let Some(dir) = arg("--solidcraft=") {
+        std::fs::create_dir_all(&dir).map_err(|e| format!("{dir}: {e}"))?;
+        let f = "lyre-harp-bore30-188x400mm.solidcraft.json";
+        write(&format!("{dir}/{f}"), &lyre_solidcraft::script(&l)?)?;
+        println!("  wrote {f}");
+        return Ok(0);
     }
     if let Some(p) = arg("--render=") {
         return render(&l, &p);
