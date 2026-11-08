@@ -1,6 +1,7 @@
-# lyre_harp.py design notes
+# lyre_harp.rs design notes
 
-The reasoning behind `lyre_harp.py`. It was written beside `ribbon_bore.py`, in
+The reasoning behind `lyre_harp.rs`, which was Python until it became Rust on
+2026-11-07. It was written beside the swept-curve generator, in
 the swept-curve folder of trumpet-elbows-allowed, and these notes were a section
 of that folder's NOTES.md until 2026-10-14, when the swept-curve trumpet bores
 became the [swept-curve](https://github.com/Gernreich/swept-curve) repository and
@@ -9,12 +10,12 @@ trumpet; it only borrows that generator's parts.
 
 ## A closed duct whose width changes
 
-Not a `--shape`, because every shape in `ribbon_bore.py` is two walls a fixed
+Not a `--shape`, because every shape in `ribbon_bore.rs` is two walls a fixed
 bore either side of one centreline. The lyre-harp frame (2026-09-16) is two
 independent closed walls: a stadium 400 mm long outside, and a string hole with
 a concentric arch, parallel sides and a bump between tangent corners. Over the
 arch and down the sides the duct is 30 x 30 mm; below the hole it opens to the
-whole gap, about 200 mm along the axis, which is the resonator. It imports the
+whole gap, about 200 mm along the axis, which is the resonator. It borrows the
 panel, mortice, label, packer, sheet and ring-contour code from `ribbon_bore`
 and adds only the two outlines and the checks a constant bore made
 unnecessary. Its cut files go to this repository, whose
@@ -75,8 +76,8 @@ worked, because an overstated kerf draws each tab fat and each mortice thin,
 but it also drew every other line 0.07 mm out: outlines oversize, holes
 undersize, the duct and the knot with them. So the kerf went back to the truth
 and the interference moved to `FIT`, which only the joints read, then up to
-0.25 for a fit that needs a rubber mallet. `lyre_harp.KERF` sets
-`ribbon_bore.BURN` for its own run and nothing else. Raising `BURN` in ribbon_bore.py would
+0.25 for a fit that needs a rubber mallet. `KERF` in `lyre_harp.rs` sets
+ribbon_bore's `burn` for its own run and nothing else. Raising the default `burn` in ribbon_bore.rs would
 redraw every shipped swept-curve sheet, and those are the record of parts already cut.
 
 `--test=PATH` writes an ARCH TEST PIECE: the string-hole wall's panels

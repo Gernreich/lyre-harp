@@ -216,10 +216,11 @@ pre,.tw{break-inside:avoid}h1{break-after:avoid}}
 <p><strong><code>lyre-harp-bore30-188x400mm-narrow-cheek-a-BACK-FACE-numbers-engrave-only.svg</code> has no cut line in it.</strong> It puts the 49 slot numbers on the back of cheek A, mirrored, for dropping the panels in from that side. Cut cheek A first, turn it over <strong>about its long axis</strong> — the 400 mm one, so the sound hole stays at the same end — lay it in the same place and run this. Turned end for end instead, the numbers miss: the string hole is not symmetric that way.</p>
 <p><strong>No acoustic claim is made.</strong> The strings, the pins and the tuning are not in these files — this is the frame.</p>
 <h2 id="regenerating-it">Regenerating it</h2>
-<p>Everything here is drawn by <strong><code>lyre_harp.py</code></strong>, in this repository. It imports the panel, slot and sheet code from <strong><a href="https://github.com/Gernreich/swept-curve/blob/main/ribbon_bore.py" target="_blank" rel="noopener"><code>ribbon_bore.py</code></a></strong>, the generator of the <a href="https://github.com/Gernreich/swept-curve" target="_blank" rel="noopener">swept-curve</a> trumpet bores, so it expects that repository cloned beside this one. From this one:</p>
-<pre class="sh"><code>python3 lyre_harp.py --no-write                     # run the checks, write nothing
-python3 lyre_harp.py --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg     # the five sheets
-python3 lyre_harp.py --fit=0.21 --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg</code></pre>
+<p>Everything here is drawn by <strong><code>lyre_harp.rs</code></strong>, in this repository: Rust since 2026-11-07 (Python until then; the move changed no number in any file). It uses the panel, slot and sheet code of <strong><a href="https://github.com/Gernreich/swept-curve/blob/main/ribbon_bore.rs" target="_blank" rel="noopener"><code>ribbon_bore.rs</code></a></strong>, the generator of the <a href="https://github.com/Gernreich/swept-curve" target="_blank" rel="noopener">swept-curve</a> trumpet bores, so it expects that repository cloned beside this one. From this one:</p>
+<pre class="sh"><code>cargo build --release
+target/release/lyre_harp --no-write                     # run the checks, write nothing
+target/release/lyre_harp --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg     # the five sheets
+target/release/lyre_harp --fit=0.21 --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg</code></pre>
 <p><code>--fit=</code> redraws the joints at another fit and moves nothing else; the kerf stays the measured one. The checks — panels clear of each other, every engraving on its part, the sound hole over the resonator, the pins in their blocks, every sheet on the bed — run on every write and stop it when one fails. <code>.repro</code> holds the exact command for every file here.</p>
 <h2 id="files">Files</h2>
 <div class="tw">
@@ -234,8 +235,12 @@ python3 lyre_harp.py --fit=0.21 --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg<
 <td>the frame in 3D, cheeks, panels and blocks, to drag round</td>
 </tr>
 <tr>
-<td><code>lyre_harp.py</code></td>
-<td>the generator: every sheet, the drawing and the 3D page, with their checks</td>
+<td><code>lyre_harp.rs</code> · <code>lyre_harp_page.rs</code></td>
+<td>the generator: every sheet, the drawing and the 3D page, with their checks; the second holds the 3D page's browser code</td>
+</tr>
+<tr>
+<td><code>Cargo.toml</code> · <code>Cargo.lock</code></td>
+<td>what <code>cargo build --release</code> builds it from</td>
 </tr>
 <tr>
 <td><code>NOTES.md</code></td>

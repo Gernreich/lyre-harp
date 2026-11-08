@@ -1,0 +1,22 @@
+[package]
+name = "lyre-harp"
+version = "0.1.0"
+edition = "2021"
+authors = ["Michael Gernreich", "Claude (Anthropic) <noreply@anthropic.com>"]
+description = "A lyre-harp frame as one closed laser-cut duct whose width changes round the loop"
+license-file = "LICENSE"
+publish = false
+autobins = false
+
+# One generator. Its panels, mortices, labels, packing and sheets are
+# swept-curve's (the ribbon_bore library), cloned beside this checkout.
+[[bin]]
+name = "lyre_harp"
+path = "lyre_harp.rs"
+
+[dependencies]
+lasermade-tools = { path = "../lasermade-tools" }
+swept-curve = { path = "../swept-curve" }
+
+[profile.release]
+opt-level = 3

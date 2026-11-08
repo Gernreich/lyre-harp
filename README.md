@@ -136,17 +136,19 @@ files — this is the frame.
 
 ## Regenerating it
 
-Everything here is drawn by **`lyre_harp.py`**, in this repository. It imports
-the panel, slot and sheet code from
-**[`ribbon_bore.py`](https://github.com/Gernreich/swept-curve/blob/main/ribbon_bore.py)**,
+Everything here is drawn by **`lyre_harp.rs`**, in this repository: Rust since
+2026-11-07 (Python until then; the move changed no number in any file). It uses
+the panel, slot and sheet code of
+**[`ribbon_bore.rs`](https://github.com/Gernreich/swept-curve/blob/main/ribbon_bore.rs)**,
 the generator of the [swept-curve](https://github.com/Gernreich/swept-curve)
 trumpet bores, so it expects that repository cloned beside this one. From this
 one:
 
 ```sh
-python3 lyre_harp.py --no-write                     # run the checks, write nothing
-python3 lyre_harp.py --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg     # the five sheets
-python3 lyre_harp.py --fit=0.21 --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg
+cargo build --release
+target/release/lyre_harp --no-write                     # run the checks, write nothing
+target/release/lyre_harp --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg     # the five sheets
+target/release/lyre_harp --fit=0.21 --out=DIR/lyre-harp-bore30-188x400mm-narrow.svg
 ```
 
 `--fit=` redraws the joints at another fit and moves nothing else; the
@@ -161,7 +163,8 @@ command for every file here.
 |---|---|
 | `lyre-harp-bore30-188x400mm/cut-files/` | the five build sheets, the three test sheets and the back-face engraving |
 | `lyre-harp-bore30-188x400mm/lyre-harp-bore30-188x400mm.html` | the frame in 3D, cheeks, panels and blocks, to drag round |
-| `lyre_harp.py` | the generator: every sheet, the drawing and the 3D page, with their checks |
+| `lyre_harp.rs` · `lyre_harp_page.rs` | the generator: every sheet, the drawing and the 3D page, with their checks; the second holds the 3D page's browser code |
+| `Cargo.toml` · `Cargo.lock` | what `cargo build --release` builds it from |
 | `NOTES.md` | why the generator draws what it does, and what each check has caught |
 | `lyre-harp-drawing.svg` | the dimensioned review drawing — **not** a cut file |
 | `previews/` | display renderings of the five build sheets — **not** cut files |

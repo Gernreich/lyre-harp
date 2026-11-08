@@ -5,7 +5,3 @@
 # and the rest, and writes no file under the stem itself.
 
 lyre-harp-bore30-188x400mm-narrow.svg
-
-# ribbon_bore.py is the swept-curve repository's generator, whose panel, slot
-# and sheet code lyre_harp.py imports. The README links it there.
-ribbon_bore.py
