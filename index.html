@@ -310,7 +310,12 @@ target/release/lyre_harp --solidcraft=DIR                # the SolidCraft design
 <tr>
 <td><code>kerf</code> · <code>fit</code></td>
 <td>0.13 · 0.25 mm</td>
-<td>the beam, and the kerf the joints are drawn as if cut at (<code>--fit=</code>); the cheeks' rims follow the fit</td>
+<td>the beam, and the kerf the joints are drawn as if cut at (<code>--fit=</code>); the mortices and the cheeks' rims follow the fit</td>
+</tr>
+<tr>
+<td><code>tooth</code> · <code>shoulder</code> · <code>play</code></td>
+<td>6 · 2 · −0.035 mm</td>
+<td>each tooth and each gap along a panel, the least of it left past its end teeth, and each mortice's play a side along its tooth (it follows the fit)</td>
 </tr>
 <tr>
 <td><code>knot_up</code></td>
@@ -330,10 +335,10 @@ target/release/lyre_harp --solidcraft=DIR                # the SolidCraft design
 </tbody>
 </table>
 </div>
-<p>The rest are read-only parameters, a few hundred of them: each point's <code>_x</code> and <code>_y</code>, each face edge's normal and each vertex's mitre, each panel's trims, length and middle. How many facets each arc has, and which facets a block starts on, are the default build's, so they stay put while the numbers move. As in the 3D view the panels are plain boxes, without teeth or slots, the cheeks have no mortices, and the pins are left out.</p>
-<p><strong>Checked</strong> part by part against the generator's own: all 63 parts match to within 0.001 mm, the page's rounding. Built by the generator with <code>--fit=0.20</code>, and with the frame 420 mm long, a 28 mm bore and 3.2 mm ply, and given the same numbers, every part matches the same way.</p>
+<p>The rest are read-only parameters, a few hundred of them: each point's <code>_x</code> and <code>_y</code>, each face edge's normal and each vertex's mitre, each panel's trims, length and middle. How many facets each arc has, and which facets a block starts on, are the default build's, so they stay put while the numbers move. The panels have their teeth and both cheeks their mortices (2026-11-09), each panel as many teeth as its length holds, so a panel made longer gains them. The cheeks' rims are as cut: the generator draws each rim on its mortices' outer edges with no kerf added, so the beam leaves it half a kerf inside the line and every mortice is a notch open to the rim. The pins are left out.</p>
+<p><strong>Checked</strong> part by part against the generator's own: all 63 parts match to within 0.001 mm, the page's rounding. Built by the generator with <code>--fit=0.20</code>, and with the frame 420 mm long, a 28 mm bore and 3.2 mm ply, and given the same numbers, every part matches the same way. Read back with <code>sc-flatten --redraw-all</code> and compared with the committed cut files, all 63 parts agree: cuts within 0.026 mm, engraved marks within 0.123 mm (2026-11-09).</p>
 <h2 id="step-files">STEP files</h2>
-<p><code>lyre-harp-bore30-188x400mm/step/</code> holds the SolidCraft design, built by SolidCraft, as a STEP file to open or import in a CAD program such as Fusion or FreeCAD: one solid body per part, in millimetres, assembled, with no parameters. The wall panels are the plain boxes the 3D view draws, and the hitch and tuning pins are left out. <code>.repro</code> checks it:</p>
+<p><code>lyre-harp-bore30-188x400mm/step/</code> holds the SolidCraft design, built by SolidCraft, as a STEP file to open or import in a CAD program such as Fusion or FreeCAD: one solid body per part, in millimetres, assembled, with no parameters. The wall panels have their teeth and the cheeks their mortices, and the hitch and tuning pins are left out. <code>.repro</code> checks it:</p>
 <pre><code>target/release/lyre_harp --solidcraft=lyre-harp-bore30-188x400mm/solidcraft
 solidcraft-cli run lyre-harp-bore30-188x400mm/solidcraft/lyre-harp-bore30-188x400mm.solidcraft.json --out lyre-harp-bore30-188x400mm/step/lyre-harp-bore30-188x400mm.step</code></pre>
 <p>The files:</p>

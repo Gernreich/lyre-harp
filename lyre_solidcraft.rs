@@ -14,11 +14,16 @@
 //! facets each arc has, are the default build's: they stay put while the
 //! numbers move.
 //!
-//! As in the 3D view the panels are plain boxes, without teeth or slots, the
-//! cheeks have no mortices, and the pins are left out. The frame lies in XY,
-//! as the page has it, the cheeks at Z = +-bore/2.
+//! The panels have their teeth and the cheeks their mortices, as cut
+//! (2026-11-09): ribbon_bore's joints(), as many teeth as each panel's
+//! length holds, so sc-flatten reads the design back onto the cut sheets.
+//! The cheeks' rims are as cut, half a kerf inside the drawn line, which
+//! runs along the mortices' outer edges, so each mortice is an open notch.
+//! The pins are left out. The frame lies in XY, as the page has it, the
+//! cheeks at Z = +-bore/2.
 use super::*;
 use lasermade_tools::solidcraft::{n as nn, Script};
+use ribbon_bore::ribbon_solidcraft::{joint_params, joints, Joint};
 
 /// A point: its two coordinates as expressions (or parameters), and their
 /// value at the defaults, which every decision below is taken on.
@@ -147,7 +152,10 @@ pub fn script(l: &Lyre) -> R<String> {
     s.num("hole_bump", nn(HOLE_BUMP), "the bump between them, how high it rises, the same");
     s.len("kerf", format!("{} mm", nn(KERF)), "the beam, measured");
     s.len("fit", format!("{} mm", nn(l.fit)), "the kerf the joints are drawn as if cut at: the generator's --fit=");
-    s.len("cheek_past", "(ply - (fit - kerf))/2 - kerf/2", "read only: the cheeks' rims past each wall's centreline, its mortice's half-width");
+    s.len("sheet", "ply", "read only: the ply the cheeks' mortices are cut for");
+    s.len("slot_tighten", "fit - kerf", "read only: what the fit takes off each mortice, both ways");
+    joint_params(s, b, &format!("{} mm - (fit - kerf)/2", nn(b.play() + (l.fit - KERF) / 2.0)));
+    s.len("cheek_past", "(sheet - slot_tighten)/2 - kerf", "read only: the cheeks' rims past each wall's centreline, as cut: the line is drawn on its mortices' edge, and the beam takes half a kerf inside it");
     s.num("knot_up", nn(KNOT_UP), "the knot's centre, its share of the way from the outer wall's far end to the bump");
     s.len("hitch_w", format!("{} mm", nn(HITCH_WIDTH)), "the hitch block, in from the outer wall's face");
     s.num("pins", nn(PINS as f64), "pins across, the hitch's and the tuning's");
@@ -249,7 +257,7 @@ pub fn script(l: &Lyre) -> R<String> {
     // the walls' centrelines, and the cheeks' rims past them
     let outer = away(&mut c, "co", &face_o, "ply/2", t / 2.0, true);
     let hole = away(&mut c, "ci", &face_i, "ply/2", t / 2.0, false);
-    let cp = b.cheek_off() - b.wall_off();
+    let cp = b.cheek_off() - b.wall_off() - b.burn / 2.0;
     let rim_o = away(&mut c, "ro", &outer, "cheek_past", cp, true);
     let rim_i = away(&mut c, "ri", &hole, "cheek_past", cp, false);
     let (gouter, ghole, parts) = l.build()?;
@@ -264,6 +272,7 @@ pub fn script(l: &Lyre) -> R<String> {
         u: (String, String),
         nrm: (String, String),
         v: (P, f64),
+        pname: String,
     }
     let mut pans: Vec<Pn> = vec![];
     for (wall, q, tag) in [("inner", &hole, "pi"), ("outer", &outer, "po")] {
@@ -288,7 +297,7 @@ pub fn script(l: &Lyre) -> R<String> {
             let (uxv, uyv) = (nk.2 .1, -nk.2 .0);
             let mv = ((a.v.0 + bb.v.0) / 2.0 + (e0.1 - e1.1) / 2.0 * uxv, (a.v.1 + bb.v.1) / 2.0 + (e0.1 - e1.1) / 2.0 * uyv);
             let mid = c.pt(&format!("{tag}{k}_mid"), format!("({} + {})/2 + {sh}*({ux})", a.x, bb.x), format!("({} + {})/2 + {sh}*({uy})", a.y, bb.y), mv);
-            pans.push(Pn { name: format!("{wall} panel {k}"), mid: (mid.x, mid.y), len, u: (ux, uy), nrm: (nk.0.clone(), nk.1.clone()), v: (mv, lenv) });
+            pans.push(Pn { name: format!("{wall} panel {k}"), mid: (mid.x, mid.y), len, u: (ux, uy), nrm: (nk.0.clone(), nk.1.clone()), v: (mv, lenv), pname: format!("{tag}{k}") });
         }
     }
     if pans.len() != parts.len() || pans.iter().zip(&parts).any(|(p, q)| (p.v.0 .0 - q.mid.0).hypot(p.v.0 .1 - q.mid.1) > 1e-9 || (p.v.1 - q.len).abs() > 1e-9) {
@@ -297,8 +306,15 @@ pub fn script(l: &Lyre) -> R<String> {
     for (p, q) in pans.iter_mut().zip(&parts) {
         p.name = format!("{} panel {}", q.wall, q.tag);
     }
-    let rims = contours(&l.cheek(&gouter, &ghole));
-    if worst(&lv(&rim_o.p), &rims[0]) > 1e-9 || worst(&lv(&rim_i.p), &rims[1]) > 1e-9 {
+    // the rims as cut: the generator's cheek() less half a kerf
+    let close = |mut r: Vec<P>| {
+        let n = r.len();
+        r[n - 1] = r[0];
+        r
+    };
+    let (want_o, want_i) = (close(l.away(&gouter, cp, true)), close(l.away(&ghole, cp, false)));
+    let drawn = contours(&l.cheek(&gouter, &ghole));
+    if drawn.len() != 2 || worst(&lv(&rim_o.p), &want_o) > 1e-9 || worst(&lv(&rim_i.p), &want_i) > 1e-9 {
         return Err("the design's rims are off the generator's".into());
     }
     // the knot, at its share of the resonator
@@ -459,6 +475,10 @@ pub fn script(l: &Lyre) -> R<String> {
         s.finish();
         s.extrude(&sk, "bore", false, "new", &[], &p.name);
     }
+    // every panel's teeth, and its mortices in both cheeks; no panel's count
+    // differs from what its length holds
+    let js: Vec<Joint> = pans.iter().map(|p| Joint { body: p.name.clone(), pname: p.pname.clone(), mid: p.mid.clone(), u: p.u.clone(), n: p.nrm.clone(), len: p.len.clone(), fixed: None }).collect();
+    joints(s, &js, &["front cheek", "back cheek"], &|x, y| [format!("-({y})"), format!("-({x})")]);
     s.measure();
     Ok(c.s.text())
 }
